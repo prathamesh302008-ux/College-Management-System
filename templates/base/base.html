@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        College Management System
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        College ERP System
+    </div>
+
+    <div class="user-info">
+
+        Welcome, {{ request.user.username }}
+
+        {% if request.user.is_authenticated and request.user.userprofile %}
+            | {{ request.user.userprofile.role }}
+        {% endif %}
+
+    </div>
+
+</header>
+
+
+<div class="college-title">
+
+    Shri Gulabrao Deokar College of Polytechnic
+
+</div>
+
+
+<div class="main">
+
+<aside class="sidebar">
+
+<h2>Menu</h2>
+
+<ul>
+
+<li>
+    <a href="/dashboard/">
+        Dashboard
+    </a>
+</li>
+
+<!-- ================= PRINCIPAL ================= -->
+
+{% if request.user.userprofile.role == "Principal" %}
+
+<li><a href="/students/">Students</a></li>
+
+<li><a href="/faculty/">Faculty</a></li>
+
+<li><a href="/departments/">Departments</a></li>
+
+<li><a href="/courses/">Courses</a></li>
+
+<li><a href="/attendance/">Attendance</a></li>
+
+<li><a href="/fees/">Fees</a></li>
+
+<li><a href="/library/">Library</a></li>
+
+<li><a href="/noticeboard/">Notice Board</a></li>
+
+{% endif %}
+
+
+
+<!-- ================= HOD ================= -->
+
+{% if request.user.userprofile.role == "HOD" %}
+
+<li><a href="/students/">Students</a></li>
+
+<li><a href="/attendance/">Attendance</a></li>
+
+<li><a href="/fees/">Fees</a></li>
+
+<li><a href="/library/">Library</a></li>
+
+<li><a href="/noticeboard/">Notice Board</a></li>
+
+{% endif %}
+
+
+
+<!-- ================= FACULTY ================= -->
+
+{% if request.user.userprofile.role == "Faculty" %}
+
+<li><a href="/students/">Students</a></li>
+
+<li><a href="/attendance/">Attendance</a></li>
+
+<li><a href="/library/">Library</a></li>
+
+<li><a href="/noticeboard/">Notice Board</a></li>
+
+{% endif %}
+
+
+
+<!-- ================= STUDENT ================= -->
+
+{% if request.user.userprofile.role == "Student" %}
+
+<li><a href="/students/">My Profile</a></li>
+
+<li><a href="/attendance/">My Attendance</a></li>
+
+<li><a href="/fees/">My Fees</a></li>
+
+<li><a href="/library/">Library</a></li>
+
+<li><a href="/noticeboard/">Notice Board</a></li>
+
+{% endif %}
+
+
+<li>
+
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+
+</li>
+
+</ul>
+
+</aside>
+
+
+<section class="content">
+
+{% block content %}
+
+{% endblock %}
+
+</section>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Students
+{% endblock %}
+
+{% block content %}
+
+<div class="student-page">
+
+    <div class="student-header">
+
+        <h1>Student List</h1>
+
+        {% if request.user.userprofile.role == "Principal" %}
+        <a href="{% url 'add_student' %}" class="add-student-btn">
+            + Add Student
+        </a>
+        {% endif %}
+
+    </div>
+
+    {% if request.user.userprofile.role == "Principal" %}
+
+    <form method="GET" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search Student..."
+            value="{{ search }}"
+            class="search-box"
+        >
+
+        <button type="submit" class="search-btn">
+            Search
+        </button>
+
+    </form>
+
+    {% endif %}
+
+    <div class="table-card">
+
+        <table class="student-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Photo</th>
+
+                    <th>Enrollment No</th>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Course</th>
+
+                    <th>Semester</th>
+
+                    {% if request.user.userprofile.role == "Principal" %}
+                    <th>Action</th>
+                    {% endif %}
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for student in students %}
+
+                <tr>
+
+                    <td>
+
+                        {% if student.photo %}
+
+                            <img
+                                src="{{ student.photo.url }}"
+                                width="60"
+                                height="60"
+                                style="border-radius:50%;object-fit:cover;"
+                            >
+
+                        {% else %}
+
+                            No Photo
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ student.enrollment_no }}</td>
+
+                    <td>
+                        {{ student.first_name }}
+                        {{ student.last_name }}
+                    </td>
+
+                    <td>{{ student.email }}</td>
+
+                    <td>{{ student.course }}</td>
+
+                    <td>{{ student.semester }}</td>
+
+                    {% if request.user.userprofile.role == "Principal" %}
+
+                    <td>
+
+                        <a href="{% url 'edit_student' student.id %}" class="edit-btn">
+                            Edit
+                        </a>
+
+                        <a href="{% url 'delete_student' student.id %}"
+                           class="delete-btn"
+                           onclick="return confirm('Are you sure?');">
+                            Delete
+                        </a>
+
+                    </td>
+
+                    {% endif %}
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    {% if request.user.userprofile.role == "Principal" %}
+                        <td colspan="7">No Student Found</td>
+                    {% else %}
+                        <td colspan="6">No Student Record Found</td>
+                    {% endif %}
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% if request.user.userprofile.role == "Principal" %}
+
+    <br>
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a href="?page=1&search={{ search }}">First</a>
+
+            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+                Previous
+            </a>
+
+        {% endif %}
+
+        <span>
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+        </span>
+
+        {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+                Next
+            </a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">
+                Last
+            </a>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

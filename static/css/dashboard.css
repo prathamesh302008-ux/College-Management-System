@@ -1,0 +1,530 @@
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+    font-family:Arial, sans-serif;
+
+    background:#f4f6f9;
+
+}
+
+
+
+
+
+/* Navbar */
+
+
+.navbar{
+
+    height:70px;
+
+    background:#1e293b;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 30px;
+
+}
+
+
+
+.logo{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+
+
+.user-info{
+
+    font-size:16px;
+
+}
+
+
+
+
+
+/* Moving College Name */
+.college-title{
+
+    width:100%;
+
+    background:linear-gradient(
+        90deg,
+        #0f172a,
+        #1d4ed8,
+        #0f172a
+    );
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    padding:18px 0;
+
+    letter-spacing:1px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+
+}
+
+@keyframes glow{
+
+    from{
+
+        text-shadow:0 0 5px white;
+
+    }
+
+
+    to{
+
+        text-shadow:0 0 20px white;
+
+    }
+
+}
+
+
+
+@keyframes moveText{
+
+
+    from{
+
+        transform:translateX(100%);
+
+    }
+
+
+    to{
+
+        transform:translateX(-100%);
+
+    }
+
+
+}
+
+
+
+
+
+/* Main Layout */
+
+
+.main{
+
+    display:flex;
+
+}
+
+
+
+
+
+/* Sidebar */
+
+
+.sidebar{
+
+    width:250px;
+
+    min-height:100vh;
+
+    background:#111827;
+
+    padding:20px;
+
+}
+
+
+
+.sidebar h2{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.sidebar ul{
+
+    list-style:none;
+
+}
+
+
+
+.sidebar ul li{
+
+    padding:15px;
+
+}
+
+
+
+.sidebar ul li a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:17px;
+
+}
+
+
+
+.sidebar ul li:hover{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+/* Content */
+
+
+.content{
+
+    flex:1;
+
+    padding:30px;
+
+}
+
+
+
+
+
+.dashboard-title{
+
+    font-size:32px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+
+/* Cards */
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+
+
+
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+
+}
+
+
+
+.card h2{
+
+    font-size:20px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.card p{
+
+    font-size:35px;
+
+    font-weight:bold;
+
+    color:#2563eb;
+
+}
+
+
+
+
+
+/* Welcome Box */
+
+
+.welcome-box{
+
+    margin-top:40px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+
+
+.welcome-box h2{
+
+    margin-bottom:10px;
+
+}
+
+.student-form-container{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+
+}
+
+
+.form-card{
+
+    width:500px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+
+
+.form-card h1{
+
+    text-align:center;
+    margin-bottom:10px;
+
+}
+
+
+
+.form-fields input,
+.form-fields textarea,
+.form-fields select{
+
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ccc;
+
+}
+
+
+
+.update-btn{
+
+    width:100%;
+    padding:12px;
+
+    background:#1565c0;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+.update-btn:hover{
+
+    background:#0d47a1;
+
+}
+
+
+
+.back-btn{
+
+    text-decoration:none;
+
+}
+
+.content{
+
+    padding-top:20px;
+
+}
+
+
+.student-form-container,
+.student-list-container{
+
+    margin-top: -20px;
+
+}
+
+.student-table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+
+.student-table th,
+.student-table td{
+
+    border:1px solid #ddd;
+
+    padding:12px;
+
+}
+
+
+.student-table th{
+
+    background:#1565c0;
+
+    color:white;
+
+    text-align:left;
+
+}
+
+
+.student-table tr:hover{
+
+    background:#f5f5f5;
+
+}
+
+.search-form{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+}
+
+
+.search-box{
+
+    width:320px;
+
+    padding:10px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+}
+
+
+.search-btn{
+
+    background:#1565c0;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+.search-btn:hover{
+
+    background:#0d47a1;
+
+}
+
+.pagination{
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+.pagination a{
+
+    text-decoration:none;
+
+    background:#1565c0;
+
+    color:white;
+
+    padding:8px 15px;
+
+    margin:5px;
+
+    border-radius:6px;
+
+}
+
+.pagination span{
+
+    font-weight:bold;
+
+    margin:0 15px;
+
+}

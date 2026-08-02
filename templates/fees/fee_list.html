@@ -1,0 +1,163 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+
+Fees
+
+{% endblock %}
+
+{% block content %}
+
+<div class="student-page">
+
+    <div class="student-header">
+
+        <h1>
+
+            Fee List
+
+        </h1>
+
+        <a href="{% url 'add_fee' %}" class="add-student-btn">
+
+            + Add Fee
+
+        </a>
+
+    </div>
+
+    <form method="GET" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            value="{{ search }}"
+            placeholder="Search Student..."
+            class="search-box"
+        >
+
+        <button type="submit" class="search-btn">
+
+            Search
+
+        </button>
+
+    </form>
+
+    <div class="table-card">
+
+        <table class="student-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Student</th>
+
+                    <th>Total Fee</th>
+
+                    <th>Paid Fee</th>
+
+                    <th>Pending Fee</th>
+
+                    <th>Status</th>
+
+                    <th>Payment Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for fee in fees %}
+
+                <tr>
+
+                    <td>{{ fee.student }}</td>
+
+                    <td>₹ {{ fee.total_fee }}</td>
+
+                    <td>₹ {{ fee.paid_fee }}</td>
+
+                    <td>₹ {{ fee.pending_fee }}</td>
+
+                    <td>{{ fee.status }}</td>
+
+                    <td>{{ fee.payment_date }}</td>
+
+                    <td>
+
+                        <a href="{% url 'edit_fee' fee.id %}" class="edit-btn">
+
+                            Edit
+
+                        </a>
+
+                        |
+
+                        <a href="{% url 'delete_fee' fee.id %}"
+                           class="delete-btn"
+                           onclick="return confirm('Delete this fee record?');">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="7" style="text-align:center;">
+
+                        No Fee Records Found
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a href="?page=1&search={{ search }}">First</a>
+
+            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">Previous</a>
+
+        {% endif %}
+
+        <span>
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+        </span>
+
+        {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">Next</a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">Last</a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

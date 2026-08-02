@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+
+Add Notice
+
+{% endblock %}
+
+{% block content %}
+
+<div class="student-page">
+
+    <div class="form-card">
+
+        <h1>
+
+            Add Notice
+
+        </h1>
+
+        <p>
+
+            Enter Notice Details
+
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-fields">
+
+                {{ form.as_p }}
+
+            </div>
+
+            <button type="submit" class="save-btn">
+
+                Save Notice
+
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="{% url 'notice_list' %}" class="back-btn">
+
+            ← Back To Notice Board
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

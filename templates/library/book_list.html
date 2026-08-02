@@ -1,0 +1,170 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+
+Library
+
+{% endblock %}
+
+{% block content %}
+
+<div class="student-page">
+
+    <div class="student-header">
+
+        <h1>
+
+            Library Books
+
+        </h1>
+
+        <a href="{% url 'add_book' %}" class="add-student-btn">
+
+            + Add Book
+
+        </a>
+
+    </div>
+
+    <form method="GET" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            value="{{ search }}"
+            placeholder="Search Book..."
+            class="search-box"
+        >
+
+        <button
+            type="submit"
+            class="search-btn"
+        >
+
+            Search
+
+        </button>
+
+    </form>
+
+    <div class="table-card">
+
+        <table class="student-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Book Name</th>
+
+                    <th>Book Code</th>
+
+                    <th>Author</th>
+
+                    <th>Publisher</th>
+
+                    <th>Total</th>
+
+                    <th>Available</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for book in books %}
+
+                <tr>
+
+                    <td>{{ book.book_name }}</td>
+
+                    <td>{{ book.book_code }}</td>
+
+                    <td>{{ book.author }}</td>
+
+                    <td>{{ book.publisher }}</td>
+
+                    <td>{{ book.quantity }}</td>
+
+                    <td>{{ book.available }}</td>
+
+                    <td>{{ book.status }}</td>
+
+                    <td>
+
+                        <a href="{% url 'edit_book' book.id %}" class="edit-btn">
+
+                            Edit
+
+                        </a>
+
+                        |
+
+                        <a href="{% url 'delete_book' book.id %}"
+                           class="delete-btn"
+                           onclick="return confirm('Delete this book?');">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="8" style="text-align:center;">
+
+                        No Books Available
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a href="?page=1&search={{ search }}">First</a>
+
+            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">Previous</a>
+
+        {% endif %}
+
+        <span>
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+        </span>
+
+        {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">Next</a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">Last</a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,249 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1 class="dashboard-title">
+    Welcome {{ username }}
+</h1>
+
+{% if role == "Principal" %}
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Total Students</h2>
+        <p>{{ total_students }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Faculty</h2>
+        <p>{{ total_faculty }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Courses</h2>
+        <p>{{ total_courses }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Departments</h2>
+        <p>{{ total_departments }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Attendance</h2>
+        <p>{{ total_attendance }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Fee Records</h2>
+        <p>{{ total_fees }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Books</h2>
+        <p>{{ total_books }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Notices</h2>
+        <p>{{ total_notices }}</p>
+    </div>
+
+</div>
+
+<div class="welcome-box">
+
+    <h2>Principal Dashboard</h2>
+
+    <p>
+        You have complete access to the College Management System.
+    </p>
+
+</div>
+
+<hr>
+
+<h2>Latest Notices</h2>
+
+<table class="table">
+
+    <tr>
+
+        <th>Title</th>
+
+        <th>Date</th>
+
+    </tr>
+
+    {% for notice in latest_notices %}
+
+    <tr>
+
+        <td>{{ notice.title }}</td>
+
+        <td>{{ notice.notice_date }}</td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="2">No Notice Found</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% elif role == "Student" %}
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Present</h2>
+        <p>{{ present_count }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Absent</h2>
+        <p>{{ absent_count }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Leave</h2>
+        <p>{{ leave_count }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Attendance</h2>
+        <p>{{ attendance_count }}</p>
+    </div>
+
+</div>
+
+<div class="welcome-box">
+
+    <h2>Student Information</h2>
+
+    {% if student %}
+
+    <p><strong>Name :</strong> {{ student.first_name }} {{ student.last_name }}</p>
+
+    <p><strong>Enrollment :</strong> {{ student.enrollment_no }}</p>
+
+    <p><strong>Course :</strong> {{ student.course }}</p>
+
+    <p><strong>Semester :</strong> {{ student.semester }}</p>
+
+    {% endif %}
+
+    {% if fee %}
+
+    <p><strong>Fee Status :</strong> {{ fee.status }}</p>
+
+    <p><strong>Pending Fee :</strong> {{ fee.pending_fee }}</p>
+
+    {% endif %}
+
+    <p><strong>Library Books :</strong> {{ books }}</p>
+
+</div>
+
+<hr>
+
+<h2>Latest Notices</h2>
+
+<table class="table">
+
+    <tr>
+
+        <th>Title</th>
+
+        <th>Date</th>
+
+    </tr>
+
+    {% for notice in latest_notices %}
+
+    <tr>
+
+        <td>{{ notice.title }}</td>
+
+        <td>{{ notice.notice_date }}</td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="2">No Notice Available</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% elif role == "HOD" %}
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Total Attendance</h2>
+        <p>{{ total_attendance }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Library Books</h2>
+        <p>{{ total_books }}</p>
+    </div>
+
+</div>
+
+<div class="welcome-box">
+
+    <h2>HOD Dashboard</h2>
+
+    <p>
+        Welcome {{ username }}.
+    </p>
+
+</div>
+
+{% elif role == "Faculty" %}
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Total Attendance</h2>
+        <p>{{ total_attendance }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Library Books</h2>
+        <p>{{ total_books }}</p>
+    </div>
+
+</div>
+
+<div class="welcome-box">
+
+    <h2>Faculty Dashboard</h2>
+
+    <p>
+        Welcome {{ username }}.
+    </p>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

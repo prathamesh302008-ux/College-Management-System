@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+
+{% block title %}
+
+Add Student
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="student-page">
+
+
+    <div class="form-card">
+
+
+        <h1>
+            Add Student
+        </h1>
+
+
+        <p>
+            Enter Student Details
+        </p>
+
+
+
+      <form method="POST" enctype="multipart/form-data">
+
+
+            {% csrf_token %}
+
+
+            <div class="form-fields">
+
+                {{ form.as_p }}
+
+            </div>
+
+
+
+            <button type="submit" class="save-btn">
+
+                Save Student
+
+            </button>
+
+
+
+        </form>
+
+
+
+        <br>
+
+
+        <a href="{% url 'student_list' %}" class="back-btn">
+
+            ← Back To Student List
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}

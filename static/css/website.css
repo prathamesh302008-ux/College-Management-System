@@ -1,0 +1,980 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar{
+    width:100%;
+    height:80px;
+    background:#0d47a1;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 60px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo h2{
+    color:#fff;
+    font-size:28px;
+    letter-spacing:1px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+}
+
+nav ul li{
+    margin-left:30px;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+    transition:.3s;
+}
+
+nav ul li a:hover{
+    color:#ffd54f;
+}
+
+.login-btn{
+    background:#ff9800;
+    padding:10px 20px;
+    border-radius:6px;
+}
+
+.login-btn:hover{
+    background:#e68900;
+    color:white;
+}
+
+/* ===========================
+   Main
+=========================== */
+
+main{
+    min-height:80vh;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+footer h3{
+    margin-bottom:10px;
+}
+
+footer p{
+    font-size:15px;
+}
+
+/* ===========================
+   Hero Section
+=========================== */
+
+.hero{
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("../images/college.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content h1{
+    color:white;
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    color:white;
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+.hero-btn{
+    display:inline-block;
+    background:#ff9800;
+    color:white;
+    text-decoration:none;
+    padding:15px 35px;
+    border-radius:8px;
+    font-size:20px;
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    background:#e68900;
+}
+
+/* ===========================================
+   About Section
+=========================================== */
+
+.about-section{
+    width:100%;
+    padding:80px 10%;
+    background:#ffffff;
+    text-align:center;
+}
+
+.about-section h2{
+    font-size:40px;
+    color:#0d47a1;
+    margin-bottom:25px;
+}
+
+.about-section p{
+    font-size:19px;
+    color:#555;
+    line-height:32px;
+    max-width:1000px;
+    margin:auto;
+}
+
+/* ===========================================
+   Statistics
+=========================================== */
+
+.stats{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:70px 10%;
+    background:#f5f7fb;
+    flex-wrap:wrap;
+}
+
+.card{
+
+    width:240px;
+
+    background:white;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    padding:35px 20px;
+
+    box-shadow:0px 8px 20px rgba(0,0,0,.12);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card h2{
+
+    color:#0d47a1;
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+}
+
+.card p{
+
+    font-size:20px;
+
+    color:#666;
+
+}
+
+/* ===========================================
+   Features
+=========================================== */
+
+.features{
+
+    padding:80px 10%;
+
+    background:white;
+
+}
+
+.features h2{
+
+    text-align:center;
+
+    font-size:42px;
+
+    color:#0d47a1;
+
+    margin-bottom:50px;
+
+}
+
+.feature-box{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+.feature{
+
+    background:#f5f7fb;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+
+}
+
+.feature:hover{
+
+    background:#0d47a1;
+
+    color:white;
+
+    transform:translateY(-8px);
+
+}
+
+.feature:hover h3{
+
+    color:white;
+
+}
+
+.feature h3{
+
+    color:#0d47a1;
+
+    margin-bottom:15px;
+
+    font-size:25px;
+
+}
+
+.feature p{
+
+    line-height:28px;
+
+}
+
+/* ===========================================
+   CTA Section
+=========================================== */
+
+.cta{
+
+    background:#0d47a1;
+
+    color:white;
+
+    text-align:center;
+
+    padding:80px 10%;
+
+}
+
+.cta h2{
+
+    font-size:42px;
+
+    margin-bottom:20px;
+
+}
+
+.cta p{
+
+    font-size:20px;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================================
+   Responsive
+=========================================== */
+
+@media(max-width:768px){
+
+.hero-content h1{
+
+font-size:38px;
+
+}
+
+.hero-content p{
+
+font-size:18px;
+
+}
+
+.navbar{
+
+flex-direction:column;
+
+height:auto;
+
+padding:20px;
+
+}
+
+nav ul{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+nav ul li{
+
+margin:10px 0;
+
+}
+
+.stats{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+}
+
+/* ===========================
+   ABOUT PAGE
+=========================== */
+
+.about-banner{
+
+    height:350px;
+
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("../images/college.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.about-content h1{
+
+    color:white;
+
+    font-size:55px;
+
+}
+
+.about-content p{
+
+    color:white;
+
+    font-size:22px;
+
+    margin-top:15px;
+
+}
+
+.college-about{
+
+    padding:80px 10%;
+
+    text-align:center;
+
+}
+
+.college-about h2{
+
+    color:#0d47a1;
+
+    font-size:42px;
+
+    margin-bottom:20px;
+
+}
+
+.college-about p{
+
+    font-size:20px;
+
+    line-height:35px;
+
+    color:#555;
+
+}
+
+.vision-mission{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    padding:60px 10%;
+
+    background:#f5f7fb;
+
+}
+
+.vision-card{
+
+    width:450px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.vision-card h2{
+
+    color:#0d47a1;
+
+    margin-bottom:20px;
+
+}
+
+.highlights{
+
+    padding:80px 10%;
+
+}
+
+.highlights h2{
+
+    text-align:center;
+
+    color:#0d47a1;
+
+    margin-bottom:40px;
+
+    font-size:40px;
+
+}
+
+.highlight-box{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+.highlight{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.principal-message{
+
+    background:#0d47a1;
+
+    color:white;
+
+    text-align:center;
+
+    padding:80px 10%;
+
+}
+
+.principal-message h2{
+
+    margin-bottom:20px;
+
+    font-size:40px;
+
+}
+
+.principal-message p{
+
+    font-size:20px;
+
+    line-height:35px;
+
+}
+
+.achievements{
+
+    padding:80px 10%;
+
+}
+
+.achievements h2{
+
+    text-align:center;
+
+    color:#0d47a1;
+
+    margin-bottom:40px;
+
+    font-size:40px;
+
+}
+
+.achievements ul{
+
+    max-width:700px;
+
+    margin:auto;
+
+    font-size:22px;
+
+    line-height:45px;
+
+}
+
+/* ===========================
+   HELP PAGE
+=========================== */
+
+.help-banner{
+
+    height:320px;
+
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("../images/college.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.help-content h1{
+
+    color:white;
+
+    font-size:55px;
+
+}
+
+.help-content p{
+
+    color:white;
+
+    font-size:22px;
+
+    margin-top:15px;
+
+}
+
+.faq-section{
+
+    padding:80px 10%;
+
+    background:#f5f7fb;
+
+}
+
+.faq-section h2{
+
+    text-align:center;
+
+    color:#0d47a1;
+
+    margin-bottom:40px;
+
+    font-size:40px;
+
+}
+
+.faq-card{
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.faq-card h3{
+
+    color:#0d47a1;
+
+    margin-bottom:12px;
+
+}
+
+.faq-card p{
+
+    color:#555;
+
+    line-height:28px;
+
+}
+
+.support-section{
+
+    padding:80px 10%;
+
+    text-align:center;
+
+}
+
+.support-section h2{
+
+    color:#0d47a1;
+
+    font-size:40px;
+
+    margin-bottom:20px;
+
+}
+
+.support-section p{
+
+    color:#666;
+
+    margin-bottom:40px;
+
+}
+
+.support-box{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+.support-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+    transition:.3s;
+
+}
+
+.support-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.support-card h3{
+
+    color:#0d47a1;
+
+    margin-bottom:15px;
+
+}
+
+/* ==================================
+        CONTACT PAGE
+================================== */
+
+.contact-banner{
+
+    height:320px;
+
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("../images/college.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.contact-content{
+
+    text-align:center;
+
+}
+
+.contact-content h1{
+
+    color:white;
+
+    font-size:55px;
+
+}
+
+.contact-content p{
+
+    color:white;
+
+    font-size:22px;
+
+    margin-top:15px;
+
+}
+
+.contact-section{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    padding:80px 10%;
+
+    flex-wrap:wrap;
+
+}
+
+.contact-left{
+
+    flex:1;
+
+    min-width:350px;
+
+}
+
+.contact-right{
+
+    flex:1;
+
+    min-width:350px;
+
+}
+
+.contact-left h2,
+.contact-right h2{
+
+    color:#0d47a1;
+
+    margin-bottom:20px;
+
+}
+
+.contact-left p{
+
+    color:#555;
+
+    line-height:30px;
+
+}
+
+.contact-right form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.contact-right input,
+.contact-right textarea{
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+}
+
+.contact-right button{
+
+    background:#0d47a1;
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:8px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.contact-right button:hover{
+
+    background:#1565c0;
+
+}
+
+.map-section{
+
+    padding:80px 10%;
+
+    text-align:center;
+
+}
+
+.map-section h2{
+
+    color:#0d47a1;
+
+    margin-bottom:30px;
+
+    font-size:40px;
+
+}
+
+.map-box{
+
+    height:400px;
+
+    background:#ddd;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:10px;
+
+    font-size:22px;
+
+    color:#555;
+
+}
+
+.map-section{
+
+    padding:70px 10%;
+
+    background:#f5f7fb;
+
+    text-align:center;
+
+}
+
+.map-section h2{
+
+    font-size:36px;
+
+    color:#0d47a1;
+
+    margin-bottom:10px;
+
+}
+
+.map-section p{
+
+    font-size:18px;
+
+    color:#555;
+
+    margin-bottom:30px;
+
+}
+
+.map-container{
+
+    width:100%;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0px 8px 20px rgba(0,0,0,0.2);
+
+}
+
+.map-container iframe{
+
+    width:100%;
+
+    height:450px;
+
+    border:none;
+
+}

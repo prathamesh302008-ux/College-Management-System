@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Principal Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1 class="dashboard-title">
+    👑 Principal Dashboard
+</h1>
+
+<h3>
+    Welcome {{ request.user.username }}
+</h3>
+
+<hr>
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Total Students</h2>
+        <p>{{ total_students }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Faculty</h2>
+        <p>{{ total_faculty }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Courses</h2>
+        <p>{{ total_courses }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Departments</h2>
+        <p>{{ total_departments }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Attendance</h2>
+        <p>{{ total_attendance }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Fee Records</h2>
+        <p>{{ total_fees }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Library Books</h2>
+        <p>{{ total_books }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Notice Board</h2>
+        <p>{{ total_notices }}</p>
+    </div>
+
+</div>
+
+<br>
+
+<div class="welcome-box">
+
+    <h2>Principal Access</h2>
+
+    <p>
+        You have complete access to the College Management System.
+    </p>
+
+    <ul>
+        <li>✔ Student Management</li>
+        <li>✔ Faculty Management</li>
+        <li>✔ Department Management</li>
+        <li>✔ Course Management</li>
+        <li>✔ Attendance Management</li>
+        <li>✔ Fee Management</li>
+        <li>✔ Library Management</li>
+        <li>✔ Notice Board</li>
+        <li>✔ Full Reports</li>
+    </ul>
+
+</div>
+
+{% endblock %}

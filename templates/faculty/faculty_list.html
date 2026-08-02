@@ -1,0 +1,280 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+
+Faculty
+
+{% endblock %}
+
+{% block content %}
+
+<div class="student-page">
+
+    <div class="student-header">
+
+        <h1>
+
+            Faculty List
+
+        </h1>
+
+        <a href="{% url 'add_faculty' %}" class="add-student-btn">
+
+            + Add Faculty
+
+        </a>
+
+    </div>
+
+
+
+    <form method="GET" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            value="{{ search }}"
+            placeholder="Search Faculty..."
+            class="search-box"
+        >
+
+        <button
+            type="submit"
+            class="search-btn"
+        >
+
+            Search
+
+        </button>
+
+    </form>
+
+
+
+    <div class="table-card">
+
+        <table class="student-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+
+                        Photo
+
+                    </th>
+
+                    <th>
+
+                        Faculty ID
+
+                    </th>
+
+                    <th>
+
+                        Name
+
+                    </th>
+
+                    <th>
+
+                        Email
+
+                    </th>
+
+                    <th>
+
+                        Phone
+
+                    </th>
+
+                    <th>
+
+                        Department
+
+                    </th>
+
+                    <th>
+
+                        Qualification
+
+                    </th>
+
+                    <th>
+
+                        Joining Date
+
+                    </th>
+
+                    <th>
+
+                        Action
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+
+            <tbody>
+
+            {% for faculty in faculty %}
+
+                <tr>
+
+                    <td>
+
+                        {% if faculty.photo %}
+
+                            <img
+                                src="{{ faculty.photo.url }}"
+                                width="60"
+                                height="60"
+                                style="border-radius:50%; object-fit:cover;"
+                            >
+
+                        {% else %}
+
+                            No Photo
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.faculty_id }}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.first_name }}
+                        {{ faculty.last_name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.email }}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.phone }}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.department }}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.qualification }}
+
+                    </td>
+
+                    <td>
+
+                        {{ faculty.joining_date }}
+
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'edit_faculty' faculty.id %}" class="edit-btn">
+
+                            Edit
+
+                        </a>
+
+                        |
+
+                        <a href="{% url 'delete_faculty' faculty.id %}" class="delete-btn">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="9" style="text-align:center;">
+
+                        No Faculty Added
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <br>
+
+
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a href="?page=1&search={{ search }}">
+
+                First
+
+            </a>
+
+            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+
+                Previous
+
+            </a>
+
+        {% endif %}
+
+        <span>
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+        </span>
+
+        {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+
+                Next
+
+            </a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">
+
+                Last
+
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

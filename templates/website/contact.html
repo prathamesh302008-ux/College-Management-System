@@ -1,0 +1,152 @@
+{% extends 'base/website_base.html' %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+<section class="contact-banner">
+
+    <div class="contact-content">
+
+        <h1>Contact Us</h1>
+
+        <p>
+            We'd love to hear from you. Feel free to contact us anytime.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="contact-section">
+
+    <div class="contact-left">
+
+        <h2>College Information</h2>
+
+        <br>
+
+        <p><strong>🏫 College</strong></p>
+
+        <p>
+            Shri Gulabrao Deokar College of Polytechnic,
+            Jalgaon
+        </p>
+
+        <br>
+
+        <p><strong>📍 Address</strong></p>
+
+        <p>
+            Jalgaon,<br>
+            Maharashtra - 425001,<br>
+            India
+        </p>
+
+        <br>
+
+        <p><strong>📧 Email</strong></p>
+
+        <p>
+            info@sgdpolytechnic.ac.in
+        </p>
+
+        <br>
+
+        <p><strong>📞 Phone</strong></p>
+
+        <p>
+            1234567890
+        </p>
+
+        <br>
+
+        <p><strong>🕒 Office Hours</strong></p>
+
+        <p>
+            Monday - Saturday
+            <br>
+            09:00 AM - 05:00 PM
+        </p>
+
+    </div>
+
+
+
+    <div class="contact-right">
+
+        <h2>Send Message</h2>
+
+        <form>
+
+            <input
+                type="text"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <input
+                type="text"
+                placeholder="Subject"
+                required
+            >
+
+            <textarea
+                rows="6"
+                placeholder="Your Message"
+                required
+            ></textarea>
+
+            <button type="submit">
+
+                Send Message
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<section class="map-section">
+
+    <h2>College Location</h2>
+
+    <p>
+
+        Visit Shri Gulabrao Deokar College of Polytechnic, Jalgaon.
+
+    </p>
+
+    <br>
+
+    <div class="map-container">
+
+        <iframe
+            src="https://www.google.com/maps?q=Shri+Gulabrao+Deokar+College+of+Polytechnic+Jalgaon&output=embed"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+
+        </iframe>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Student Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1 class="dashboard-title">
+    🎓 Student Dashboard
+</h1>
+
+<h3>
+    Welcome {{ request.user.username }}
+</h3>
+
+<hr>
+
+<div class="cards">
+
+    <div class="card">
+        <h2>My Attendance</h2>
+        <p>{{ attendance }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Fee Records</h2>
+        <p>{{ fees }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Library Books</h2>
+        <p>{{ books }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Active Notices</h2>
+        <p>{{ notices }}</p>
+    </div>
+
+</div>
+
+<br>
+
+<div class="welcome-box">
+
+    <h2>Student Access</h2>
+
+    <p>
+        Welcome to your Student Dashboard.
+    </p>
+
+    <ul>
+        <li>✔ View Your Profile</li>
+        <li>✔ View Attendance</li>
+        <li>✔ View Fee Status</li>
+        <li>✔ View Library Books</li>
+        <li>✔ View Notices</li>
+        <li>✔ View Course Details</li>
+    </ul>
+
+</div>
+
+{% endblock %}
