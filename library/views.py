@@ -6,25 +6,27 @@ from .models import Book
 from .forms import BookForm
 
 
-def is_principal(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role == "Principal"
-    )
+def get_role(request):
+    if request.user.is_authenticated and hasattr(request.user, "userprofile"):
+        return request.user.userprofile.role
+    return ""
+
+
+def can_manage_library(request):
+    return get_role(request) in [
+        "Principal",
+        "HOD",
+        "Faculty",
+    ]
 
 
 def can_view_library(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role in [
-            "Principal",
-            "HOD",
-            "Faculty",
-            "Student",
-        ]
-    )
+    return get_role(request) in [
+        "Principal",
+        "HOD",
+        "Faculty",
+        "Student",
+    ]
 
 
 # Book List
@@ -39,7 +41,6 @@ def book_list(request):
     books = Book.objects.all().order_by("id")
 
     if search:
-
         books = books.filter(
             book_name__icontains=search
         ) | Book.objects.filter(
@@ -69,7 +70,7 @@ def book_list(request):
 @login_required
 def add_book(request):
 
-    if not is_principal(request):
+    if not can_manage_library(request):
         return redirect("login")
 
     if request.method == "POST":
@@ -77,9 +78,7 @@ def add_book(request):
         form = BookForm(request.POST)
 
         if form.is_valid():
-
             form.save()
-
             return redirect("book_list")
 
     else:
@@ -99,7 +98,7 @@ def add_book(request):
 @login_required
 def edit_book(request, id):
 
-    if not is_principal(request):
+    if not can_manage_library(request):
         return redirect("login")
 
     book = get_object_or_404(Book, id=id)
@@ -112,9 +111,7 @@ def edit_book(request, id):
         )
 
         if form.is_valid():
-
             form.save()
-
             return redirect("book_list")
 
     else:
@@ -134,7 +131,7 @@ def edit_book(request, id):
 @login_required
 def delete_book(request, id):
 
-    if not is_principal(request):
+    if not can_manage_library(request):
         return redirect("login")
 
     book = get_object_or_404(Book, id=id)

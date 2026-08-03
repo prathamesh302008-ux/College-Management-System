@@ -12,7 +12,7 @@ Students
 
         <h1>Student List</h1>
 
-        {% if request.user.userprofile.role == "Principal" %}
+        {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" or request.user.userprofile.role == "Faculty" %}
         <a href="{% url 'add_student' %}" class="add-student-btn">
             + Add Student
         </a>
@@ -20,7 +20,7 @@ Students
 
     </div>
 
-    {% if request.user.userprofile.role == "Principal" %}
+    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" or request.user.userprofile.role == "Faculty" %}
 
     <form method="GET" class="search-form">
 
@@ -49,18 +49,13 @@ Students
                 <tr>
 
                     <th>Photo</th>
-
                     <th>Enrollment No</th>
-
                     <th>Name</th>
-
                     <th>Email</th>
-
                     <th>Course</th>
-
                     <th>Semester</th>
 
-                    {% if request.user.userprofile.role == "Principal" %}
+                    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" or request.user.userprofile.role == "Faculty" %}
                     <th>Action</th>
                     {% endif %}
 
@@ -106,7 +101,7 @@ Students
 
                     <td>{{ student.semester }}</td>
 
-                    {% if request.user.userprofile.role == "Principal" %}
+                    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" or request.user.userprofile.role == "Faculty" %}
 
                     <td>
 
@@ -130,7 +125,7 @@ Students
 
                 <tr>
 
-                    {% if request.user.userprofile.role == "Principal" %}
+                    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" or request.user.userprofile.role == "Faculty" %}
                         <td colspan="7">No Student Found</td>
                     {% else %}
                         <td colspan="6">No Student Record Found</td>
@@ -146,7 +141,7 @@ Students
 
     </div>
 
-    {% if request.user.userprofile.role == "Principal" %}
+    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" or request.user.userprofile.role == "Faculty" %}
 
     <br>
 
@@ -163,9 +158,7 @@ Students
         {% endif %}
 
         <span>
-
             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-
         </span>
 
         {% if page_obj.has_next %}

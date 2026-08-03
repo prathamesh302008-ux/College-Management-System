@@ -17,25 +17,37 @@ def is_principal(request):
     return get_role(request) == "Principal"
 
 
+def is_hod(request):
+    return get_role(request) == "HOD"
+
+
+def is_faculty(request):
+    return get_role(request) == "Faculty"
+
+
 def is_student(request):
     return get_role(request) == "Student"
+
+
+def can_manage_students(request):
+    return get_role(request) in [
+        "Principal",
+        "HOD",
+        "Faculty",
+    ]
 
 
 @login_required
 def student_list(request):
 
-    # ==========================
-    # Principal
-    # ==========================
-
-    if is_principal(request):
+    # Principal / HOD / Faculty
+    if can_manage_students(request):
 
         search = request.GET.get("search", "")
 
         students = Student.objects.all().order_by("id")
 
         if search:
-
             students = students.filter(
                 first_name__icontains=search
             ) | Student.objects.filter(
@@ -61,10 +73,7 @@ def student_list(request):
             }
         )
 
-    # ==========================
     # Student
-    # ==========================
-
     elif is_student(request):
 
         try:
@@ -104,7 +113,7 @@ def student_list(request):
 @login_required
 def add_student(request):
 
-    if not is_principal(request):
+    if not can_manage_students(request):
         return HttpResponseForbidden("Access Denied")
 
     if request.method == "POST":
@@ -115,9 +124,7 @@ def add_student(request):
         )
 
         if form.is_valid():
-
             form.save()
-
             return redirect("student_list")
 
     else:
@@ -136,7 +143,7 @@ def add_student(request):
 @login_required
 def edit_student(request, id):
 
-    if not is_principal(request):
+    if not can_manage_students(request):
         return HttpResponseForbidden("Access Denied")
 
     student = get_object_or_404(
@@ -153,9 +160,7 @@ def edit_student(request, id):
         )
 
         if form.is_valid():
-
             form.save()
-
             return redirect("student_list")
 
     else:
@@ -176,7 +181,7 @@ def edit_student(request, id):
 @login_required
 def delete_student(request, id):
 
-    if not is_principal(request):
+    if not can_manage_students(request):
         return HttpResponseForbidden("Access Denied")
 
     student = get_object_or_404(

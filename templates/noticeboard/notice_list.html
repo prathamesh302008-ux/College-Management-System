@@ -1,9 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-
 Notice Board
-
 {% endblock %}
 
 {% block content %}
@@ -12,20 +10,17 @@ Notice Board
 
     <div class="student-header">
 
-        <h1>
+        <h1>Notice Board</h1>
 
-            Notice Board
-
-        </h1>
-
+        {% if request.user.userprofile.role != "Student" %}
         <a href="{% url 'add_notice' %}" class="add-student-btn">
-
             + Add Notice
-
         </a>
+        {% endif %}
 
     </div>
 
+    {% if request.user.userprofile.role != "Student" %}
     <form method="GET" class="search-form">
 
         <input
@@ -38,14 +33,12 @@ Notice Board
 
         <button
             type="submit"
-            class="search-btn"
-        >
-
+            class="search-btn">
             Search
-
         </button>
 
     </form>
+    {% endif %}
 
     <div class="table-card">
 
@@ -56,14 +49,13 @@ Notice Board
                 <tr>
 
                     <th>Title</th>
-
                     <th>Description</th>
-
                     <th>Date</th>
-
                     <th>Status</th>
 
+                    {% if request.user.userprofile.role != "Student" %}
                     <th>Action</th>
+                    {% endif %}
 
                 </tr>
 
@@ -83,12 +75,11 @@ Notice Board
 
                     <td>{{ notice.status }}</td>
 
+                    {% if request.user.userprofile.role != "Student" %}
                     <td>
 
                         <a href="{% url 'edit_notice' notice.id %}" class="edit-btn">
-
                             Edit
-
                         </a>
 
                         |
@@ -96,12 +87,11 @@ Notice Board
                         <a href="{% url 'delete_notice' notice.id %}"
                            class="delete-btn"
                            onclick="return confirm('Are you sure you want to delete this notice?');">
-
                             Delete
-
                         </a>
 
                     </td>
+                    {% endif %}
 
                 </tr>
 
@@ -109,11 +99,15 @@ Notice Board
 
                 <tr>
 
+                    {% if request.user.userprofile.role != "Student" %}
                     <td colspan="5" style="text-align:center;">
-
                         No Notice Available
-
                     </td>
+                    {% else %}
+                    <td colspan="4" style="text-align:center;">
+                        No Notice Available
+                    </td>
+                    {% endif %}
 
                 </tr>
 
@@ -125,6 +119,8 @@ Notice Board
 
     </div>
 
+    {% if request.user.userprofile.role != "Student" %}
+
     <br>
 
     <div class="pagination">
@@ -133,25 +129,31 @@ Notice Board
 
             <a href="?page=1&search={{ search }}">First</a>
 
-            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">Previous</a>
+            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+                Previous
+            </a>
 
         {% endif %}
 
         <span>
-
             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-
         </span>
 
         {% if page_obj.has_next %}
 
-            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">Next</a>
+            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+                Next
+            </a>
 
-            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">Last</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">
+                Last
+            </a>
 
         {% endif %}
 
     </div>
+
+    {% endif %}
 
 </div>
 

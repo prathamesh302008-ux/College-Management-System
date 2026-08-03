@@ -6,25 +6,27 @@ from .models import Notice
 from .forms import NoticeForm
 
 
-def is_principal(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role == "Principal"
-    )
+def get_role(request):
+    if request.user.is_authenticated and hasattr(request.user, "userprofile"):
+        return request.user.userprofile.role
+    return ""
+
+
+def can_manage_notice(request):
+    return get_role(request) in [
+        "Principal",
+        "HOD",
+        "Faculty",
+    ]
 
 
 def can_view_notice(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role in [
-            "Principal",
-            "HOD",
-            "Faculty",
-            "Student",
-        ]
-    )
+    return get_role(request) in [
+        "Principal",
+        "HOD",
+        "Faculty",
+        "Student",
+    ]
 
 
 # Notice List
@@ -64,7 +66,7 @@ def notice_list(request):
 @login_required
 def add_notice(request):
 
-    if not is_principal(request):
+    if not can_manage_notice(request):
         return redirect("login")
 
     if request.method == "POST":
@@ -92,7 +94,7 @@ def add_notice(request):
 @login_required
 def edit_notice(request, id):
 
-    if not is_principal(request):
+    if not can_manage_notice(request):
         return redirect("login")
 
     notice = get_object_or_404(Notice, id=id)
@@ -125,7 +127,7 @@ def edit_notice(request, id):
 @login_required
 def delete_notice(request, id):
 
-    if not is_principal(request):
+    if not can_manage_notice(request):
         return redirect("login")
 
     notice = get_object_or_404(Notice, id=id)

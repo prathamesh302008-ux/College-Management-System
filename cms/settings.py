@@ -8,7 +8,11 @@ SECRET_KEY = "django-insecure-college-management-system"
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "college-management-system123-1.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
 
 INSTALLED_APPS = [
@@ -135,6 +139,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
 
@@ -154,3 +159,4 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

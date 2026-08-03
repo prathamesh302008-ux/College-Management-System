@@ -1,9 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-
 Library
-
 {% endblock %}
 
 {% block content %}
@@ -12,20 +10,17 @@ Library
 
     <div class="student-header">
 
-        <h1>
+        <h1>Library Books</h1>
 
-            Library Books
-
-        </h1>
-
+        {% if request.user.userprofile.role != "Student" %}
         <a href="{% url 'add_book' %}" class="add-student-btn">
-
             + Add Book
-
         </a>
+        {% endif %}
 
     </div>
 
+    {% if request.user.userprofile.role != "Student" %}
     <form method="GET" class="search-form">
 
         <input
@@ -40,12 +35,11 @@ Library
             type="submit"
             class="search-btn"
         >
-
             Search
-
         </button>
 
     </form>
+    {% endif %}
 
     <div class="table-card">
 
@@ -56,20 +50,16 @@ Library
                 <tr>
 
                     <th>Book Name</th>
-
                     <th>Book Code</th>
-
                     <th>Author</th>
-
                     <th>Publisher</th>
-
                     <th>Total</th>
-
                     <th>Available</th>
-
                     <th>Status</th>
 
+                    {% if request.user.userprofile.role != "Student" %}
                     <th>Action</th>
+                    {% endif %}
 
                 </tr>
 
@@ -82,25 +72,18 @@ Library
                 <tr>
 
                     <td>{{ book.book_name }}</td>
-
                     <td>{{ book.book_code }}</td>
-
                     <td>{{ book.author }}</td>
-
                     <td>{{ book.publisher }}</td>
-
                     <td>{{ book.quantity }}</td>
-
                     <td>{{ book.available }}</td>
-
                     <td>{{ book.status }}</td>
 
+                    {% if request.user.userprofile.role != "Student" %}
                     <td>
 
                         <a href="{% url 'edit_book' book.id %}" class="edit-btn">
-
                             Edit
-
                         </a>
 
                         |
@@ -108,12 +91,11 @@ Library
                         <a href="{% url 'delete_book' book.id %}"
                            class="delete-btn"
                            onclick="return confirm('Delete this book?');">
-
                             Delete
-
                         </a>
 
                     </td>
+                    {% endif %}
 
                 </tr>
 
@@ -121,11 +103,15 @@ Library
 
                 <tr>
 
-                    <td colspan="8" style="text-align:center;">
-
-                        No Books Available
-
-                    </td>
+                    {% if request.user.userprofile.role != "Student" %}
+                        <td colspan="8" style="text-align:center;">
+                            No Books Available
+                        </td>
+                    {% else %}
+                        <td colspan="7" style="text-align:center;">
+                            No Books Available
+                        </td>
+                    {% endif %}
 
                 </tr>
 
@@ -137,6 +123,8 @@ Library
 
     </div>
 
+    {% if request.user.userprofile.role != "Student" %}
+
     <br>
 
     <div class="pagination">
@@ -145,25 +133,31 @@ Library
 
             <a href="?page=1&search={{ search }}">First</a>
 
-            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">Previous</a>
+            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+                Previous
+            </a>
 
         {% endif %}
 
         <span>
-
             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-
         </span>
 
         {% if page_obj.has_next %}
 
-            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">Next</a>
+            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+                Next
+            </a>
 
-            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">Last</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">
+                Last
+            </a>
 
         {% endif %}
 
     </div>
+
+    {% endif %}
 
 </div>
 
