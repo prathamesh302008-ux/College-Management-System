@@ -120,7 +120,7 @@ https://github.com/prathamesh302008-ux
 
 LinkedIn
 
-https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME/
+(https://www.linkedin.com/in/prathamesh-patil-1443b8426?utm_source=share_via&utm_content=profile&utm_medium=member_android)
 
 License
 
