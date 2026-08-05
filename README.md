@@ -106,20 +106,6 @@ Project Modules
 - Notice Board
 - Authentication
 
-Screenshots
-
-Add screenshots of your project here.
-
-Future Improvements
-
-- Result Management
-- Timetable Management
-- Online Exams
-- Assignment Submission
-- Email Notifications
-- PDF Reports
-- Charts and Analytics
-
 Author
 
 Prathamesh Patil
