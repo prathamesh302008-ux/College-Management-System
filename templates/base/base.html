@@ -23,32 +23,80 @@
 
 <header class="navbar">
 
-    <div class="logo">
-        College ERP System
-    </div>
+ 
+<div class="user-info">
 
-    <div class="user-info">
-
+    <span class="welcome-text">
         Welcome, {{ request.user.username }}
+    </span>
 
-        {% if request.user.is_authenticated and request.user.userprofile %}
-            | {{ request.user.userprofile.role }}
-        {% endif %}
+    {% if request.user.is_authenticated and request.user.userprofile %}
+        <span class="user-role">
+            {{ request.user.userprofile.role }}
+        </span>
+    {% endif %}
 
-    </div>
+</div>
 
 </header>
 
 
 <div class="college-title">
 
-    Shri Gulabrao Deokar College of Polytechnic
+    <h1 class="college-name">
+
+        <span>S</span>
+        <span>h</span>
+        <span>r</span>
+        <span>i</span>
+        <span>&nbsp;</span>
+
+        <span>G</span>
+        <span>u</span>
+        <span>l</span>
+        <span>a</span>
+        <span>b</span>
+        <span>r</span>
+        <span>a</span>
+        <span>o</span>
+        <span>&nbsp;</span>
+
+        <span>D</span>
+        <span>e</span>
+        <span>o</span>
+        <span>k</span>
+        <span>a</span>
+        <span>r</span>
+        <span>&nbsp;</span>
+
+        <span>C</span>
+        <span>o</span>
+        <span>l</span>
+        <span>l</span>
+        <span>e</span>
+        <span>g</span>
+        <span>e</span>
+        <span>&nbsp;</span>
+
+        <span>o</span>
+        <span>f</span>
+        <span>&nbsp;</span>
+
+        <span>P</span>
+        <span>o</span>
+        <span>l</span>
+        <span>y</span>
+        <span>t</span>
+        <span>e</span>
+        <span>c</span>
+        <span>h</span>
+        <span>n</span>
+        <span>i</span>
+        <span>c</span>
+
+    </h1>
 
 </div>
-
-
-<div class="main">
-
 <aside class="sidebar">
 
 <h2>Menu</h2>
@@ -137,6 +185,7 @@
 
 
 <li>
+    
 
     <a href="{% url 'logout' %}">
         Logout

@@ -12,7 +12,7 @@ Fees
 
         <h1>Fee List</h1>
 
-        {% if request.user.userprofile.role != "Student" %}
+        {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" %}
         <a href="{% url 'add_fee' %}" class="add-student-btn">
             + Add Fee
         </a>
@@ -20,7 +20,7 @@ Fees
 
     </div>
 
-    {% if request.user.userprofile.role != "Student" %}
+    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" %}
     <form method="GET" class="search-form">
 
         <input
@@ -53,7 +53,7 @@ Fees
                     <th>Status</th>
                     <th>Payment Date</th>
 
-                    {% if request.user.userprofile.role != "Student" %}
+                    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" %}
                     <th>Action</th>
                     {% endif %}
 
@@ -79,7 +79,7 @@ Fees
 
                     <td>{{ fee.payment_date }}</td>
 
-                    {% if request.user.userprofile.role != "Student" %}
+                    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" %}
                     <td>
 
                         <a href="{% url 'edit_fee' fee.id %}" class="edit-btn">
@@ -103,7 +103,7 @@ Fees
 
                 <tr>
 
-                    {% if request.user.userprofile.role != "Student" %}
+                    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" %}
                     <td colspan="7" style="text-align:center;">
                         No Fee Records Found
                     </td>
@@ -123,7 +123,7 @@ Fees
 
     </div>
 
-    {% if request.user.userprofile.role != "Student" %}
+    {% if request.user.userprofile.role == "Principal" or request.user.userprofile.role == "HOD" %}
 
     <br>
 

@@ -18,7 +18,7 @@ class CourseForm(forms.ModelForm):
                     "class": "form-control"
                 }
             ),
-
+     
             "course_code": forms.TextInput(
                 attrs={
                     "class": "form-control"

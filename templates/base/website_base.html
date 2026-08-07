@@ -6,17 +6,12 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-
         {% block title %}
-
         College Management System
-
         {% endblock %}
-
     </title>
 
     <link rel="stylesheet" href="{% static 'css/website.css' %}">
@@ -31,60 +26,25 @@
 
         <ul>
 
-            <li>
+            <li><a href="{% url 'home' %}">Home</a></li>
 
-                <a href="{% url 'home' %}">
+            <li><a href="{% url 'about' %}">About</a></li>
 
-                    Home
+            <li><a href="{% url 'help' %}">Help</a></li>
 
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="{% url 'about' %}">
-
-                    About
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="{% url 'help' %}">
-
-                    Help
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="{% url 'contact' %}">
-
-                    Contact
-
-                </a>
-
-            </li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
 
         </ul>
 
     </nav>
 
     <a href="{% url 'login' %}" class="login-btn">
-
         Login
-
     </a>
 
 </header>
 
-
-<main>
+<main class="page-animation">
 
     {% block content %}
 
@@ -92,19 +52,14 @@
 
 </main>
 
-
-<footer>
+<footer class="footer-animation">
 
     <h3>
-
         Shri Gulabrao Deokar College of Polytechnic, Jalgaon
-
     </h3>
 
     <p>
-
         © 2026 College Management System. All Rights Reserved.
-
     </p>
 
 </footer>

@@ -1,0 +1,266 @@
+body::before{
+    animation:aurora1 18s ease-in-out infinite alternate;
+}
+
+body::after{
+    animation:aurora2 20s ease-in-out infinite alternate;
+}
+
+@keyframes aurora1{
+    0%{
+        transform:translate(-100px,-50px) scale(1);
+    }
+    50%{
+        transform:translate(80px,60px) scale(1.2);
+    }
+    100%{
+        transform:translate(-30px,120px) scale(.9);
+    }
+}
+
+@keyframes aurora2{
+    0%{
+        transform:translate(80px,80px) scale(1);
+    }
+    50%{
+        transform:translate(-120px,-50px) scale(1.3);
+    }
+    100%{
+        transform:translate(40px,-120px) scale(.9);
+    }
+}
+.navbar::before{
+    content:"";
+    position:absolute;
+    left:-150%;
+    top:0;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.6),
+    transparent
+    );
+    animation:shine 8s infinite;
+}
+
+@keyframes shine{
+
+    0%{
+        left:-150%;
+    }
+
+    100%{
+        left:150%;
+    }
+
+}
+.hero-btn{
+
+    position:relative;
+    overflow:hidden;
+
+}
+
+.hero-btn::before{
+
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.8),
+    transparent
+    );
+
+    animation:buttonShine 4s infinite;
+
+}
+
+@keyframes buttonShine{
+
+    from{
+
+        left:-120%;
+
+    }
+
+    to{
+
+        left:120%;
+
+    }
+
+}
+.card{
+
+    border:2px solid transparent;
+    background-clip:padding-box;
+
+}
+
+.card:hover{
+
+    border-color:#38bdf8;
+    box-shadow:
+    0 0 25px #38bdf8,
+    0 0 60px rgba(56,189,248,.3);
+
+}
+.hero-content h1{
+
+    background:linear-gradient(
+    90deg,
+    #1e3a8a,
+    #2563eb,
+    #38bdf8,
+    #1e3a8a);
+
+    background-size:400%;
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:textGradient 8s linear infinite;
+
+}
+
+@keyframes textGradient{
+
+    from{
+
+        background-position:0%;
+
+    }
+
+    to{
+
+        background-position:400%;
+
+    }
+
+}
+.hero{
+
+    perspective:1000px;
+
+}
+
+.hero-content{
+
+    transition:.5s;
+
+}
+
+.hero:hover .hero-content{
+
+    transform:rotateX(4deg) rotateY(-4deg);
+
+}
+.hero::after{
+
+    animation:
+    blobMove 18s infinite alternate,
+    floating 5s infinite;
+
+}
+body{
+
+background:
+linear-gradient(
+-45deg,
+#dbeafe,
+#e0f2fe,
+#c7d2fe,
+#dbeafe);
+
+background-size:600% 600%;
+
+animation:
+bgMove 18s infinite,
+colorWave 25s infinite;
+
+}
+
+@keyframes colorWave{
+
+0%{
+filter:hue-rotate(0deg);
+}
+
+100%{
+filter:hue-rotate(20deg);
+}
+
+}
+footer{
+
+position:relative;
+overflow:hidden;
+
+}
+
+footer::before{
+
+content:"";
+
+position:absolute;
+
+width:200%;
+
+height:200%;
+
+left:-50%;
+
+top:-80%;
+
+background:
+
+radial-gradient(circle,
+rgba(255,255,255,.25),
+transparent 70%);
+
+animation:footerLight 10s linear infinite;
+
+}
+
+@keyframes footerLight{
+
+0%{
+
+transform:rotate(0deg);
+
+}
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+section{
+
+opacity:0;
+transform:translateY(60px);
+
+animation:reveal both;
+animation-timeline:view();
+animation-range:entry 20% cover 35%;
+
+}
+
+@keyframes reveal{
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}

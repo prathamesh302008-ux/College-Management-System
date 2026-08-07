@@ -36,50 +36,36 @@ def fee_list(request):
 
     search = request.GET.get("search", "")
 
-    # ==========================
     # Principal & HOD
-    # ==========================
-
     if is_principal(request) or is_hod(request):
 
         fees = Fee.objects.all().order_by("-id")
 
         if search:
-
             fees = fees.filter(
                 student__first_name__icontains=search
             ) | Fee.objects.filter(
                 student__last_name__icontains=search
             )
 
-    # ==========================
     # Student
-    # ==========================
-
     elif is_student(request):
 
         try:
-
-            student = Student.objects.get(
-                user=request.user
-            )
+            student = Student.objects.get(user=request.user)
 
             fees = Fee.objects.filter(
                 student=student
             ).order_by("-id")
 
         except Student.DoesNotExist:
-
             fees = Fee.objects.none()
 
     else:
-
         return redirect("login")
 
     paginator = Paginator(fees, 10)
-
     page_number = request.GET.get("page")
-
     page_obj = paginator.get_page(page_number)
 
     return render(
@@ -96,7 +82,8 @@ def fee_list(request):
 @login_required
 def add_fee(request):
 
-    if not is_principal(request):
+    # Principal + HOD
+    if not (is_principal(request) or is_hod(request)):
         return redirect("fee_list")
 
     if request.method == "POST":
@@ -125,7 +112,8 @@ def add_fee(request):
 @login_required
 def edit_fee(request, id):
 
-    if not is_principal(request):
+    # Principal + HOD
+    if not (is_principal(request) or is_hod(request)):
         return redirect("fee_list")
 
     fee = get_object_or_404(
@@ -164,7 +152,8 @@ def edit_fee(request, id):
 @login_required
 def delete_fee(request, id):
 
-    if not is_principal(request):
+    # Principal + HOD
+    if not (is_principal(request) or is_hod(request)):
         return redirect("fee_list")
 
     fee = get_object_or_404(
