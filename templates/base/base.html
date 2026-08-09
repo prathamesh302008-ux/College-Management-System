@@ -1,6 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -15,31 +16,61 @@
         {% endblock %}
     </title>
 
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link
+        rel="stylesheet"
+        href="{% static 'css/dashboard.css' %}"
+    >
 
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+                        NAVBAR
+===================================================== -->
 
 <header class="navbar">
 
- 
-<div class="user-info">
+    <div class="logo">
+        CMS
+    </div>
 
-    <span class="welcome-text">
-        Welcome, {{ request.user.username }}
-    </span>
 
-    {% if request.user.is_authenticated and request.user.userprofile %}
-        <span class="user-role">
-            {{ request.user.userprofile.role }}
-        </span>
-    {% endif %}
+    <div class="user-info">
 
-</div>
+        {% if request.user.is_authenticated %}
+
+            <span class="welcome-text">
+
+                Welcome,
+                {{ request.user.username }}
+
+            </span>
+
+
+            {% if request.user.userprofile %}
+
+                <span class="user-role">
+
+                    {{ request.user.userprofile.role }}
+
+                </span>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
 
 </header>
 
+
+
+<!-- =====================================================
+                    COLLEGE TITLE
+===================================================== -->
 
 <div class="college-title">
 
@@ -97,116 +128,499 @@
     </h1>
 
 </div>
-<aside class="sidebar">
-
-<h2>Menu</h2>
-
-<ul>
-
-<li>
-    <a href="/dashboard/">
-        Dashboard
-    </a>
-</li>
-
-<!-- ================= PRINCIPAL ================= -->
-
-{% if request.user.userprofile.role == "Principal" %}
-
-<li><a href="/students/">Students</a></li>
-
-<li><a href="/faculty/">Faculty</a></li>
-
-<li><a href="/departments/">Departments</a></li>
-
-<li><a href="/courses/">Courses</a></li>
-
-<li><a href="/attendance/">Attendance</a></li>
-
-<li><a href="/fees/">Fees</a></li>
-
-<li><a href="/library/">Library</a></li>
-
-<li><a href="/noticeboard/">Notice Board</a></li>
-
-{% endif %}
 
 
 
-<!-- ================= HOD ================= -->
+<!-- =====================================================
+                        SIDEBAR
+===================================================== -->
 
-{% if request.user.userprofile.role == "HOD" %}
-
-<li><a href="/students/">Students</a></li>
-
-<li><a href="/attendance/">Attendance</a></li>
-
-<li><a href="/fees/">Fees</a></li>
-
-<li><a href="/library/">Library</a></li>
-
-<li><a href="/noticeboard/">Notice Board</a></li>
-
-{% endif %}
+<aside
+    class="sidebar"
+    id="sidebar"
+>
 
 
+    <!-- MENU BUTTON -->
 
-<!-- ================= FACULTY ================= -->
+    <button
+        type="button"
+        class="sidebar-toggle"
+        id="sidebarToggle"
+    >
 
-{% if request.user.userprofile.role == "Faculty" %}
+        ☰
 
-<li><a href="/students/">Students</a></li>
-
-<li><a href="/attendance/">Attendance</a></li>
-
-<li><a href="/library/">Library</a></li>
-
-<li><a href="/noticeboard/">Notice Board</a></li>
-
-{% endif %}
+    </button>
 
 
 
-<!-- ================= STUDENT ================= -->
+    <!-- SIDEBAR LOGO -->
 
-{% if request.user.userprofile.role == "Student" %}
+    <div class="sidebar-logo">
 
-<li><a href="/students/">My Profile</a></li>
+        <span>MENU</span>
 
-<li><a href="/attendance/">My Attendance</a></li>
-
-<li><a href="/fees/">My Fees</a></li>
-
-<li><a href="/library/">Library</a></li>
-
-<li><a href="/noticeboard/">Notice Board</a></li>
-
-{% endif %}
+    </div>
 
 
-<li>
-    
 
-    <a href="{% url 'logout' %}">
-        Logout
-    </a>
+    <!-- =================================================
+                        PRINCIPAL MENU
+    ================================================= -->
 
-</li>
+    {% if request.user.is_authenticated and request.user.userprofile.role == "Principal" %}
 
-</ul>
+    <ul>
+
+        <li>
+
+            <a href="{% url 'dashboard' %}">
+
+                <i>🏠</i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'analytics' %}">
+
+                <i>📊</i>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'student_list' %}">
+
+                <i>👨‍🎓</i>
+
+                <span>
+                    Students
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'faculty_list' %}">
+
+                <i>👨‍🏫</i>
+
+                <span>
+                    Faculty
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'course_list' %}">
+
+                <i>📚</i>
+
+                <span>
+                    Courses
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'department_list' %}">
+
+                <i>🏢</i>
+
+                <span>
+                    Departments
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'attendance_list' %}">
+
+                <i>📋</i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'fee_list' %}">
+
+                <i>💰</i>
+
+                <span>
+                    Fees
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'book_list' %}">
+
+                <i>📖</i>
+
+                <span>
+                    Library
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'notice_list' %}">
+
+                <i>📢</i>
+
+                <span>
+                    Noticeboard
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+                            HOD MENU
+    ================================================= -->
+
+    {% if request.user.is_authenticated and request.user.userprofile.role == "HOD" %}
+
+    <ul>
+
+        <li>
+
+            <a href="{% url 'dashboard' %}">
+
+                <i>🏠</i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'analytics' %}">
+
+                <i>📊</i>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'student_list' %}">
+
+                <i>👨‍🎓</i>
+
+                <span>
+                    Students
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'attendance_list' %}">
+
+                <i>📋</i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'course_list' %}">
+
+                <i>📚</i>
+
+                <span>
+                    Courses
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+                        FACULTY MENU
+    ================================================= -->
+
+    {% if request.user.is_authenticated and request.user.userprofile.role == "Faculty" %}
+
+    <ul>
+
+        <li>
+
+            <a href="{% url 'dashboard' %}">
+
+                <i>🏠</i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'analytics' %}">
+
+                <i>📊</i>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'attendance_list' %}">
+
+                <i>📋</i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'student_list' %}">
+
+                <i>👨‍🎓</i>
+
+                <span>
+                    Students
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+                        STUDENT MENU
+    ================================================= -->
+
+    {% if request.user.is_authenticated and request.user.userprofile.role == "Student" %}
+
+    <ul>
+
+        <li>
+
+            <a href="{% url 'dashboard' %}">
+
+                <i>🏠</i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'analytics' %}">
+
+                <i>📊</i>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'attendance_list' %}">
+
+                <i>📋</i>
+
+                <span>
+                    My Attendance
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'book_list' %}">
+
+                <i>📖</i>
+
+                <span>
+                    Library
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'notice_list' %}">
+
+                <i>📢</i>
+
+                <span>
+                    Notices
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+                            LOGOUT
+    ================================================= -->
+
+    {% if request.user.is_authenticated %}
+
+    <ul>
+
+        <li>
+
+            <a href="{% url 'logout' %}">
+
+                <i>🚪</i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    {% endif %}
+
 
 </aside>
 
 
-<section class="content">
 
-{% block content %}
+<!-- =====================================================
+                    CONTENT AREA
+===================================================== -->
 
-{% endblock %}
+<main class="content">
 
-</section>
+    {% block content %}
 
-</div>
+    {% endblock %}
+
+</main>
+
+
 
 </body>
 

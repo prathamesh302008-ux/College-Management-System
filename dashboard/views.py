@@ -11,8 +11,42 @@ from library.models import Book
 from noticeboard.models import Notice
 
 
+# =====================================================
+# ANALYTICS PAGE
+# =====================================================
+
 @login_required
-def dashboard_view(request):
+def analytics(request):
+
+    role = request.user.userprofile.role
+
+    context = {
+        "role": role,
+        "username": request.user.username,
+
+        "total_students": Student.objects.count(),
+        "total_faculty": Faculty.objects.count(),
+        "total_courses": Course.objects.count(),
+        "total_departments": Department.objects.count(),
+        "total_attendance": Attendance.objects.count(),
+        "total_fees": Fee.objects.count(),
+        "total_books": Book.objects.count(),
+        "total_notices": Notice.objects.count(),
+    }
+
+    return render(
+        request,
+        "dashboard/analytics.html",
+        context
+    )
+
+
+# =====================================================
+# DASHBOARD HOME
+# =====================================================
+
+@login_required
+def home(request):
 
     role = request.user.userprofile.role
 
@@ -21,42 +55,54 @@ def dashboard_view(request):
         "username": request.user.username,
     }
 
-    # =========================
+
+    # =================================================
     # PRINCIPAL
-    # =========================
+    # =================================================
 
     if role == "Principal":
 
         context.update({
 
-            "total_students": Student.objects.count(),
+            "total_students":
+                Student.objects.count(),
 
-            "total_faculty": Faculty.objects.count(),
+            "total_faculty":
+                Faculty.objects.count(),
 
-            "total_courses": Course.objects.count(),
+            "total_courses":
+                Course.objects.count(),
 
-            "total_departments": Department.objects.count(),
+            "total_departments":
+                Department.objects.count(),
 
-            "total_attendance": Attendance.objects.count(),
+            "total_attendance":
+                Attendance.objects.count(),
 
-            "total_fees": Fee.objects.count(),
+            "total_fees":
+                Fee.objects.count(),
 
-            "total_books": Book.objects.count(),
+            "total_books":
+                Book.objects.count(),
 
-            "total_notices": Notice.objects.count(),
+            "total_notices":
+                Notice.objects.count(),
 
-            "latest_students": Student.objects.order_by("-id")[:5],
+            "latest_students":
+                Student.objects.order_by("-id")[:5],
 
-            "latest_faculty": Faculty.objects.order_by("-id")[:5],
+            "latest_faculty":
+                Faculty.objects.order_by("-id")[:5],
 
-            "latest_notices": Notice.objects.order_by("-id")[:5],
+            "latest_notices":
+                Notice.objects.order_by("-id")[:5],
 
         })
 
 
-    # =========================
+    # =================================================
     # STUDENT
-    # =========================
+    # =================================================
 
     elif role == "Student":
 
@@ -65,6 +111,7 @@ def dashboard_view(request):
             student = Student.objects.get(
                 user=request.user
             )
+
             attendance = Attendance.objects.filter(
                 student=student
             )
@@ -77,25 +124,31 @@ def dashboard_view(request):
 
                 "student": student,
 
-                "attendance_count": attendance.count(),
+                "attendance_count":
+                    attendance.count(),
 
-                "present_count": attendance.filter(
-                    status="Present"
-                ).count(),
+                "present_count":
+                    attendance.filter(
+                        status="Present"
+                    ).count(),
 
-                "absent_count": attendance.filter(
-                    status="Absent"
-                ).count(),
+                "absent_count":
+                    attendance.filter(
+                        status="Absent"
+                    ).count(),
 
-                "leave_count": attendance.filter(
-                    status="Leave"
-                ).count(),
+                "leave_count":
+                    attendance.filter(
+                        status="Leave"
+                    ).count(),
 
                 "fee": fee,
 
-                "books": Book.objects.count(),
+                "books":
+                    Book.objects.count(),
 
-                "latest_notices": Notice.objects.order_by("-id")[:5],
+                "latest_notices":
+                    Notice.objects.order_by("-id")[:5],
 
             })
 
@@ -104,38 +157,45 @@ def dashboard_view(request):
             context["student"] = None
 
 
-    # =========================
+    # =================================================
     # HOD
-    # =========================
+    # =================================================
 
     elif role == "HOD":
 
         context.update({
 
-            "total_attendance": Attendance.objects.count(),
+            "total_attendance":
+                Attendance.objects.count(),
 
-            "total_books": Book.objects.count(),
+            "total_books":
+                Book.objects.count(),
 
-            "latest_notices": Notice.objects.order_by("-id")[:5],
+            "latest_notices":
+                Notice.objects.order_by("-id")[:5],
 
         })
 
 
-    # =========================
+    # =================================================
     # FACULTY
-    # =========================
+    # =================================================
 
     elif role == "Faculty":
 
         context.update({
 
-            "total_attendance": Attendance.objects.count(),
+            "total_attendance":
+                Attendance.objects.count(),
 
-            "total_books": Book.objects.count(),
+            "total_books":
+                Book.objects.count(),
 
-            "latest_notices": Notice.objects.order_by("-id")[:5],
+            "latest_notices":
+                Notice.objects.order_by("-id")[:5],
 
         })
+
 
     return render(
         request,

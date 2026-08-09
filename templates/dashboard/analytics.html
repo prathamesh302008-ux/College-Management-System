@@ -1,0 +1,544 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Analytics
+{% endblock %}
+
+{% block content %}
+
+<section class="analytics-section">
+
+    <div class="analytics-header">
+        <div>
+            <h1>Analytics Overview</h1>
+            <p>College performance at a glance</p>
+        </div>
+    </div>
+
+
+    <!-- ================================
+            ANALYTICS CARDS
+    ================================= -->
+
+    <div class="analytics-cards">
+
+        <div class="analytics-card">
+            <h3>Total Students</h3>
+            <strong>{{ total_students }}</strong>
+            <span>Registered Students</span>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Total Faculty</h3>
+            <strong>{{ total_faculty }}</strong>
+            <span>Teaching Faculty</span>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Total Courses</h3>
+            <strong>{{ total_courses }}</strong>
+            <span>Available Courses</span>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Total Departments</h3>
+            <strong>{{ total_departments }}</strong>
+            <span>College Departments</span>
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+            ATTENDANCE GRAPH
+    ================================= -->
+
+    <div class="analytics-box">
+
+        <h2>Attendance Overview</h2>
+
+        <div class="graph-container">
+
+            <div class="graph-y-axis">
+                <span>100%</span>
+                <span>80%</span>
+                <span>60%</span>
+                <span>40%</span>
+                <span>20%</span>
+                <span>0%</span>
+            </div>
+
+            <div class="graph">
+
+                <div class="grid-line line100"></div>
+                <div class="grid-line line80"></div>
+                <div class="grid-line line60"></div>
+                <div class="grid-line line40"></div>
+                <div class="grid-line line20"></div>
+                <div class="grid-line line0"></div>
+
+                <div class="bar-wrapper">
+
+                    <div class="bar bar-computer" style="height:87%;">
+                        <span>87%</span>
+                    </div>
+
+                    <p>Computer</p>
+
+                </div>
+
+                <div class="bar-wrapper">
+
+                    <div class="bar bar-civil" style="height:72%;">
+                        <span>72%</span>
+                    </div>
+
+                    <p>Civil</p>
+
+                </div>
+
+                <div class="bar-wrapper">
+
+                    <div class="bar bar-mechanical" style="height:64%;">
+                        <span>64%</span>
+                    </div>
+
+                    <p>Mechanical</p>
+
+                </div>
+
+                <div class="bar-wrapper">
+
+                    <div class="bar bar-electrical" style="height:78%;">
+                        <span>78%</span>
+                    </div>
+
+                    <p>Electrical</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+            STUDENTS GRAPH
+    ================================= -->
+
+    <div class="analytics-box">
+
+        <h2>Students by Department</h2>
+
+        <div class="horizontal-chart">
+
+            <div class="chart-row">
+
+                <div class="chart-label">
+                    Computer
+                </div>
+
+                <div class="chart-track">
+                    <div
+                        class="chart-fill"
+                        style="width:90%;">
+                    </div>
+                </div>
+
+                <strong>90%</strong>
+
+            </div>
+
+
+            <div class="chart-row">
+
+                <div class="chart-label">
+                    Civil
+                </div>
+
+                <div class="chart-track">
+                    <div
+                        class="chart-fill"
+                        style="width:65%;">
+                    </div>
+                </div>
+
+                <strong>65%</strong>
+
+            </div>
+
+
+            <div class="chart-row">
+
+                <div class="chart-label">
+                    Mechanical
+                </div>
+
+                <div class="chart-track">
+                    <div
+                        class="chart-fill"
+                        style="width:50%;">
+                    </div>
+                </div>
+
+                <strong>50%</strong>
+
+            </div>
+
+
+            <div class="chart-row">
+
+                <div class="chart-label">
+                    Electrical
+                </div>
+
+                <div class="chart-track">
+                    <div
+                        class="chart-fill"
+                        style="width:75%;">
+                    </div>
+                </div>
+
+                <strong>75%</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<style>
+
+/* ==========================================
+        ANALYTICS PAGE
+========================================== */
+
+.analytics-section{
+    width:100%;
+    padding:10px 5px 50px;
+}
+
+.analytics-header{
+    margin-bottom:30px;
+}
+
+.analytics-header h1{
+    font-size:36px;
+    color:#1f2937;
+    margin-bottom:8px;
+}
+
+.analytics-header p{
+    color:#6b7280;
+    font-size:16px;
+}
+
+
+/* ==========================================
+        CARDS
+========================================== */
+
+.analytics-cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-bottom:30px;
+}
+
+.analytics-card{
+    background:#ffffff;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border:1px solid #e5e7eb;
+    transition:.3s;
+}
+
+.analytics-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+}
+
+.analytics-card h3{
+    color:#374151;
+    margin-bottom:15px;
+}
+
+.analytics-card strong{
+    display:block;
+    font-size:38px;
+    color:#16a34a;
+    margin-bottom:8px;
+}
+
+.analytics-card span{
+    color:#6b7280;
+    font-size:14px;
+}
+
+
+/* ==========================================
+        GRAPH BOX
+========================================== */
+
+.analytics-box{
+    background:#ffffff;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.analytics-box h2{
+    color:#1f2937;
+    margin-bottom:30px;
+}
+
+
+/* ==========================================
+        BAR GRAPH
+========================================== */
+
+.graph-container{
+    display:flex;
+    height:360px;
+    width:100%;
+}
+
+.graph-y-axis{
+    width:55px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding-bottom:45px;
+    color:#6b7280;
+    font-size:13px;
+    text-align:right;
+    padding-right:10px;
+}
+
+.graph{
+    position:relative;
+    flex:1;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    border-left:1px solid #d1d5db;
+    border-bottom:1px solid #d1d5db;
+    padding:0 40px;
+}
+
+
+/* Grid */
+
+.grid-line{
+    position:absolute;
+    left:0;
+    right:0;
+    height:1px;
+    background:#e5e7eb;
+}
+
+.line100{
+    top:0;
+}
+
+.line80{
+    top:20%;
+}
+
+.line60{
+    top:40%;
+}
+
+.line40{
+    top:60%;
+}
+
+.line20{
+    top:80%;
+}
+
+.line0{
+    bottom:0;
+}
+
+
+/* ==========================================
+        BAR
+========================================== */
+
+.bar-wrapper{
+    position:relative;
+    z-index:5;
+    height:100%;
+    display:flex;
+    align-items:flex-end;
+    flex-direction:column;
+    justify-content:flex-end;
+    width:100px;
+}
+
+.bar{
+    width:65px;
+    min-height:5px;
+    border-radius:10px 10px 0 0;
+    position:relative;
+    animation:barGrow 1.2s ease forwards;
+    box-shadow:0 8px 15px rgba(0,0,0,.15);
+}
+
+.bar span{
+    position:absolute;
+    top:-28px;
+    left:50%;
+    transform:translateX(-50%);
+    font-weight:bold;
+    color:#1f2937;
+    font-size:14px;
+}
+
+.bar-wrapper p{
+    margin-top:12px;
+    color:#374151;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.bar-computer{
+    background:linear-gradient(
+        180deg,
+        #22c55e,
+        #15803d
+    );
+}
+
+.bar-civil{
+    background:linear-gradient(
+        180deg,
+        #3b82f6,
+        #1d4ed8
+    );
+}
+
+.bar-mechanical{
+    background:linear-gradient(
+        180deg,
+        #f59e0b,
+        #d97706
+    );
+}
+
+.bar-electrical{
+    background:linear-gradient(
+        180deg,
+        #8b5cf6,
+        #6d28d9
+    );
+}
+
+@keyframes barGrow{
+
+    from{
+        height:0 !important;
+    }
+
+}
+
+
+/* ==========================================
+        HORIZONTAL GRAPH
+========================================== */
+
+.horizontal-chart{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.chart-row{
+    display:grid;
+    grid-template-columns:120px 1fr 60px;
+    align-items:center;
+    gap:15px;
+}
+
+.chart-label{
+    font-weight:bold;
+    color:#374151;
+}
+
+.chart-track{
+    height:18px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.chart-fill{
+    height:100%;
+    border-radius:20px;
+
+    background:linear-gradient(
+        90deg,
+        #16a34a,
+        #22c55e
+    );
+
+    animation:chartGrow 1.2s ease;
+}
+
+.chart-row strong{
+    color:#374151;
+}
+
+@keyframes chartGrow{
+
+    from{
+        width:0 !important;
+    }
+
+}
+
+
+/* ==========================================
+        RESPONSIVE
+========================================== */
+
+@media(max-width:1000px){
+
+    .analytics-cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .analytics-cards{
+        grid-template-columns:1fr;
+    }
+
+    .graph{
+        padding:0 10px;
+    }
+
+    .bar{
+        width:45px;
+    }
+
+    .chart-row{
+        grid-template-columns:90px 1fr 45px;
+    }
+
+}
+
+</style>
+
+{% endblock %}

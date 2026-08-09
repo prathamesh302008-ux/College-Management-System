@@ -849,11 +849,7 @@ body{
     transition:.4s;
 }
 
-.card:hover::after{
-    border-color:#22c55e;
-    box-shadow:
-    0 0 18px rgba(34,197,94,.45);
-}
+
 
 /* Shine Animation */
 
@@ -877,26 +873,11 @@ body{
     transition:.8s;
 }
 
-.card:hover::before{
-    left:160%;
-}
 
-.card:hover::before{
-
-    left:140%;
-
-}
 
 /* Hover */
 
-.card:hover{
-    transform:translateY(-12px) scale(1.05);
 
-    box-shadow:
-    0 20px 45px rgba(0,0,0,.18);
-
-    border-color:#f1f4cb;
-}
 
 /* Card Title */
 
@@ -1606,3 +1587,4 @@ body{
     letter-spacing:1px;
     text-align:center;
 }
+ 

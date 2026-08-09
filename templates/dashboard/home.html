@@ -5,6 +5,7 @@ Dashboard
 {% endblock %}
 
 {% block content %}
+
 <section class="dashboard-hero">
 
     <div class="blob blob1"></div>
@@ -13,16 +14,19 @@ Dashboard
 
     <div class="dashboard-content">
 
-        <h1 class="welcome-title">Welcome Back</h1>
-
+        <h1 class="welcome-title">
+            Welcome Back
+        </h1>
 
     </div>
 
 </section>
 
+
 <h1 class="dashboard-title">
     Welcome {{ username }}
 </h1>
+
 
 {% if role == "Principal" %}
 
@@ -70,6 +74,7 @@ Dashboard
 
 </div>
 
+
 <div class="welcome-box">
 
     <h2>Principal Dashboard</h2>
@@ -80,43 +85,43 @@ Dashboard
 
 </div>
 
+
 <hr>
 
+
 <h2>Latest Notices</h2>
+
 
 <table class="table">
 
     <tr>
-
         <th>Title</th>
-
         <th>Date</th>
-
     </tr>
+
 
     {% for notice in latest_notices %}
 
     <tr>
-
         <td>{{ notice.title }}</td>
-
         <td>{{ notice.notice_date }}</td>
-
     </tr>
 
     {% empty %}
 
     <tr>
-
-        <td colspan="2">No Notice Found</td>
-
+        <td colspan="2">
+            No Notice Found
+        </td>
     </tr>
 
     {% endfor %}
 
 </table>
 
+
 {% elif role == "Student" %}
+
 
 <div class="cards">
 
@@ -142,71 +147,97 @@ Dashboard
 
 </div>
 
+
 <div class="welcome-box">
 
     <h2>Student Information</h2>
 
+
     {% if student %}
 
-    <p><strong>Name :</strong> {{ student.first_name }} {{ student.last_name }}</p>
+    <p>
+        <strong>Name :</strong>
+        {{ student.first_name }}
+        {{ student.last_name }}
+    </p>
 
-    <p><strong>Enrollment :</strong> {{ student.enrollment_no }}</p>
+    <p>
+        <strong>Enrollment :</strong>
+        {{ student.enrollment_no }}
+    </p>
 
-    <p><strong>Course :</strong> {{ student.course }}</p>
+    <p>
+        <strong>Course :</strong>
+        {{ student.course }}
+    </p>
 
-    <p><strong>Semester :</strong> {{ student.semester }}</p>
+    <p>
+        <strong>Semester :</strong>
+        {{ student.semester }}
+    </p>
 
     {% endif %}
+
 
     {% if fee %}
 
-    <p><strong>Fee Status :</strong> {{ fee.status }}</p>
+    <p>
+        <strong>Fee Status :</strong>
+        {{ fee.status }}
+    </p>
 
-    <p><strong>Pending Fee :</strong> {{ fee.pending_fee }}</p>
+    <p>
+        <strong>Pending Fee :</strong>
+        {{ fee.pending_fee }}
+    </p>
 
     {% endif %}
 
-    <p><strong>Library Books :</strong> {{ books }}</p>
+
+    <p>
+        <strong>Library Books :</strong>
+        {{ books }}
+    </p>
 
 </div>
 
+
 <hr>
 
+
 <h2>Latest Notices</h2>
+
 
 <table class="table">
 
     <tr>
-
         <th>Title</th>
-
         <th>Date</th>
-
     </tr>
+
 
     {% for notice in latest_notices %}
 
     <tr>
-
         <td>{{ notice.title }}</td>
-
         <td>{{ notice.notice_date }}</td>
-
     </tr>
 
     {% empty %}
 
     <tr>
-
-        <td colspan="2">No Notice Available</td>
-
+        <td colspan="2">
+            No Notice Available
+        </td>
     </tr>
 
     {% endfor %}
 
 </table>
 
+
 {% elif role == "HOD" %}
+
 
 <div class="cards">
 
@@ -221,6 +252,7 @@ Dashboard
     </div>
 
 </div>
+
 
 <div class="welcome-box">
 
@@ -232,7 +264,9 @@ Dashboard
 
 </div>
 
+
 {% elif role == "Faculty" %}
+
 
 <div class="cards">
 
@@ -248,6 +282,7 @@ Dashboard
 
 </div>
 
+
 <div class="welcome-box">
 
     <h2>Faculty Dashboard</h2>
@@ -257,6 +292,7 @@ Dashboard
     </p>
 
 </div>
+
 
 {% endif %}
 

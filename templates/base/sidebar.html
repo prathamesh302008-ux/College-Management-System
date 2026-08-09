@@ -1,71 +1,113 @@
-<div class="sidebar">
+<div class="logo">
 
-    <div class="logo">
+    <h2>CMS</h2>
 
-        <h2>CMS</h2>
-
-        <p>College ERP</p>
-
-    </div>
-
-    <ul>
-
-        <li><a href="/dashboard/">Dashboard</a></li>
-
-        {% if role == "Principal" %}
-
-            <li><a href="/students/">Students</a></li>
-
-            <li><a href="/faculty/">Faculty</a></li>
-
-            <li><a href="/departments/">Departments</a></li>
-
-            <li><a href="/courses/">Courses</a></li>
-
-            <li><a href="/attendance/">Attendance</a></li>
-
-            <li><a href="/fees/">Fees</a></li>
-
-            <li><a href="/library/">Library</a></li>
-
-            <li><a href="/noticeboard/">Notice Board</a></li>
-
-        {% elif role == "HOD" %}
-
-            <li><a href="/students/">Students</a></li>
-
-            <li><a href="/attendance/">Attendance</a></li>
-
-            <li><a href="/library/">Library</a></li>
-
-            <li><a href="/noticeboard/">Notice Board</a></li>
-
-        {% elif role == "Faculty" %}
-
-            <li><a href="/students/">Students</a></li>
-
-            <li><a href="/attendance/">Attendance</a></li>
-
-            <li><a href="/library/">Library</a></li>
-
-            <li><a href="/noticeboard/">Notice Board</a></li>
-
-        {% elif role == "Student" %}
-
-            <li><a href="/students/">My Profile</a></li>
-
-            <li><a href="/attendance/">My Attendance</a></li>
-
-            <li><a href="/fees/">My Fees</a></li>
-
-            <li><a href="/library/">Library</a></li>
-
-            <li><a href="/noticeboard/">Notice Board</a></li>
-
-        {% endif %}
-
-        <li><a href="/logout/">Logout</a></li>
-
-    </ul>
+    <p>College ERP</p>
 
 </div>
+
+<ul>
+
+    <li>
+        <a href="/dashboard/">Dashboard</a>
+    </li>
+
+    {% if role == "Principal" %}
+
+        <li>
+            <a href="/students/">Students</a>
+        </li>
+
+        <li>
+            <a href="/faculty/">Faculty</a>
+        </li>
+
+        <li>
+            <a href="/departments/">Departments</a>
+        </li>
+
+        <li>
+            <a href="/courses/">Courses</a>
+        </li>
+
+        <li>
+            <a href="/attendance/">Attendance</a>
+        </li>
+
+        <li>
+            <a href="/fees/">Fees</a>
+        </li>
+
+        <li>
+            <a href="/library/">Library</a>
+        </li>
+
+        <li>
+            <a href="/noticeboard/">Notice Board</a>
+        </li>
+
+    {% elif role == "HOD" %}
+
+        <li>
+            <a href="/students/">Students</a>
+        </li>
+
+        <li>
+            <a href="/attendance/">Attendance</a>
+        </li>
+
+        <li>
+            <a href="/library/">Library</a>
+        </li>
+
+        <li>
+            <a href="/noticeboard/">Notice Board</a>
+        </li>
+
+    {% elif role == "Faculty" %}
+
+        <li>
+            <a href="/students/">Students</a>
+        </li>
+
+        <li>
+            <a href="/attendance/">Attendance</a>
+        </li>
+
+        <li>
+            <a href="/library/">Library</a>
+        </li>
+
+        <li>
+            <a href="/noticeboard/">Notice Board</a>
+        </li>
+
+    {% elif role == "Student" %}
+
+        <li>
+            <a href="/students/">My Profile</a>
+        </li>
+
+        <li>
+            <a href="/attendance/">My Attendance</a>
+        </li>
+
+        <li>
+            <a href="/fees/">My Fees</a>
+        </li>
+
+        <li>
+            <a href="/library/">Library</a>
+        </li>
+
+        <li>
+            <a href="/noticeboard/">Notice Board</a>
+        </li>
+
+    {% endif %}
+
+    <li>
+        <a href="/logout/">Logout</a>
+    </li>
+
+</ul>
