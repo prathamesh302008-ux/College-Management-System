@@ -1,24 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.models import User
 
+
+# =====================================================
+# LOGIN
+# =====================================================
 
 def login_view(request):
 
-    # Agar user already login hai
     if request.user.is_authenticated:
-        return redirect("/dashboard/")
+        return redirect("dashboard:home")
 
     if request.method == "POST":
 
-        # Remove extra spaces
         username = request.POST.get("username", "").strip()
-        password = request.POST.get("password", "").strip()
-        role = request.POST.get("role", "").strip()
-
-        print("=" * 50)
-        print(f"Username = [{username}]")
-        print(f"Password = [{password}]")
-        print(f"Role = [{role}]")
+        password = request.POST.get("password", "")
 
         user = authenticate(
             request,
@@ -26,55 +24,16 @@ def login_view(request):
             password=password
         )
 
-        print("Authenticate Result :", user)
-
         if user is not None:
 
-            try:
+            login(request, user)
 
-                profile = user.userprofile
+            return redirect("dashboard:home")
 
-                print("Database Role :", profile.role)
-
-                if profile.role != role:
-
-                    return render(
-                        request,
-                        "accounts/login.html",
-                        {
-                            "error": "Selected Role is Incorrect"
-                        }
-                    )
-
-                login(request, user)
-
-                print("Login Successful")
-
-                return redirect("/dashboard/")
-
-            except Exception as e:
-
-                print("Profile Error :", e)
-
-                return render(
-                    request,
-                    "accounts/login.html",
-                    {
-                        "error": "User Profile Not Found"
-                    }
-                )
-
-        else:
-
-            print("Authentication Failed")
-
-            return render(
-                request,
-                "accounts/login.html",
-                {
-                    "error": "Invalid Username or Password"
-                }
-            )
+        messages.error(
+            request,
+            "Invalid username or password."
+        )
 
     return render(
         request,
@@ -82,8 +41,86 @@ def login_view(request):
     )
 
 
+# =====================================================
+# REGISTER
+# =====================================================
+
+def register_view(request):
+
+    if request.user.is_authenticated:
+        return redirect("dashboard:home")
+
+    if request.method == "POST":
+
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
+        confirm_password = request.POST.get(
+            "confirm_password",
+            ""
+        )
+
+        if not username or not password:
+
+            messages.error(
+                request,
+                "Username and password are required."
+            )
+
+            return render(
+                request,
+                "accounts/register.html"
+            )
+
+        if password != confirm_password:
+
+            messages.error(
+                request,
+                "Passwords do not match."
+            )
+
+            return render(
+                request,
+                "accounts/register.html"
+            )
+
+        if User.objects.filter(
+            username=username
+        ).exists():
+
+            messages.error(
+                request,
+                "Username already exists."
+            )
+
+            return render(
+                request,
+                "accounts/register.html"
+            )
+
+        User.objects.create_user(
+            username=username,
+            password=password
+        )
+
+        messages.success(
+            request,
+            "Registration successful. Please login."
+        )
+
+        return redirect("/login/")
+
+    return render(
+        request,
+        "accounts/register.html"
+    )
+
+
+# =====================================================
+# LOGOUT
+# =====================================================
+
 def logout_view(request):
 
     logout(request)
 
-    return redirect("login")
+    return redirect("/login/")

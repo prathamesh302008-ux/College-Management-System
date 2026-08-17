@@ -1587,4 +1587,32 @@ body{
     letter-spacing:1px;
     text-align:center;
 }
- 
+ /* =====================================================
+              ACADEMIC CALENDAR BUTTON
+===================================================== */
+
+.dashboard-action-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 11px 18px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+
+.dashboard-action-btn:hover {
+    background: #1d4ed8;
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}

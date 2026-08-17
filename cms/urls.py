@@ -6,44 +6,136 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path("admin/", admin.site.urls),
+    # =====================================================
+    # ADMIN
+    # =====================================================
 
-    # Website (Home Page)
-    path("", include("website.urls")),
+    path(
+        "admin/",
+        admin.site.urls
+    ),
 
-    # Login
-    path("login/", include("accounts.urls")),
 
-    # Dashboard
-    path("dashboard/", include("dashboard.urls")),
+    # =====================================================
+    # WEBSITE
+    # HOME / ABOUT / HELP / CONTACT
+    # =====================================================
 
-    # Students
-    path("students/", include("students.urls")),
+    path(
+        "",
+        include("website.urls")
+    ),
 
-    # Faculty
-    path("faculty/", include("faculty.urls")),
 
-    # Departments
-    path("departments/", include("departments.urls")),
+    # =====================================================
+    # ACCOUNTS
+    # LOGIN / REGISTER / LOGOUT
+    # =====================================================
 
-    # Courses
-    path("courses/", include("courses.urls")),
+    path(
+        "login/",
+        include("accounts.urls")
+    ),
 
-    # Attendance
-    path("attendance/", include("attendance.urls")),
 
-    # Fees
-    path("fees/", include("fees.urls")),
+    # =====================================================
+    # DASHBOARD
+    # =====================================================
 
-    # Library
-    path("library/", include("library.urls")),
+    path(
+        "dashboard/",
+        include("dashboard.urls")
+    ),
 
-    # Notice Board
-    path("noticeboard/", include("noticeboard.urls")),
+
+    # =====================================================
+    # STUDENTS
+    # =====================================================
+
+    path(
+        "students/",
+        include("students.urls")
+    ),
+
+
+    # =====================================================
+    # FACULTY
+    # =====================================================
+
+    path(
+        "faculty/",
+        include("faculty.urls")
+    ),
+
+
+    # =====================================================
+    # DEPARTMENTS
+    # =====================================================
+
+    path(
+        "departments/",
+        include("departments.urls")
+    ),
+
+
+    # =====================================================
+    # COURSES
+    # =====================================================
+
+    path(
+        "courses/",
+        include("courses.urls")
+    ),
+
+
+    # =====================================================
+    # ATTENDANCE
+    # =====================================================
+
+    path(
+        "attendance/",
+        include("attendance.urls")
+    ),
+
+
+    # =====================================================
+    # FEES
+    # =====================================================
+
+    path(
+        "fees/",
+        include("fees.urls")
+    ),
+
+
+    # =====================================================
+    # LIBRARY
+    # =====================================================
+
+    path(
+        "library/",
+        include("library.urls")
+    ),
+
+
+    # =====================================================
+    # NOTICE BOARD
+    # =====================================================
+
+    path(
+        "noticeboard/",
+        include("noticeboard.urls")
+    ),
 
 ]
 
+
+# =========================================================
+# MEDIA FILES
+# =========================================================
+
 if settings.DEBUG:
+
     urlpatterns += static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT

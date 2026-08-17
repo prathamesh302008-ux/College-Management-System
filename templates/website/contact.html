@@ -1,10 +1,16 @@
 {% extends 'base/website_base.html' %}
+{% load static %}
 
 {% block title %}
-Contact
+Contact Us | College Management System
 {% endblock %}
 
+
 {% block content %}
+
+<!-- =====================================================
+                    CONTACT BANNER
+===================================================== -->
 
 <section class="contact-banner">
 
@@ -21,7 +27,16 @@ Contact
 </section>
 
 
+<!-- =====================================================
+                    CONTACT SECTION
+===================================================== -->
+
 <section class="contact-section">
+
+
+    <!-- =================================================
+                        LEFT SIDE
+    ================================================= -->
 
     <div class="contact-left">
 
@@ -29,7 +44,12 @@ Contact
 
         <br>
 
-        <p><strong>🏫 College</strong></p>
+
+        <!-- COLLEGE -->
+
+        <p>
+            <strong>🏫 College</strong>
+        </p>
 
         <p>
             Shri Gulabrao Deokar College of Polytechnic,
@@ -38,7 +58,12 @@ Contact
 
         <br>
 
-        <p><strong>📍 Address</strong></p>
+
+        <!-- ADDRESS -->
+
+        <p>
+            <strong>📍 Address</strong>
+        </p>
 
         <p>
             Jalgaon,<br>
@@ -48,7 +73,12 @@ Contact
 
         <br>
 
-        <p><strong>📧 Email</strong></p>
+
+        <!-- EMAIL -->
+
+        <p>
+            <strong>📧 Email</strong>
+        </p>
 
         <p>
             info@sgdpolytechnic.ac.in
@@ -56,7 +86,12 @@ Contact
 
         <br>
 
-        <p><strong>📞 Phone</strong></p>
+
+        <!-- PHONE -->
+
+        <p>
+            <strong>📞 Phone</strong>
+        </p>
 
         <p>
             1234567890
@@ -64,7 +99,12 @@ Contact
 
         <br>
 
-        <p><strong>🕒 Office Hours</strong></p>
+
+        <!-- OFFICE HOURS -->
+
+        <p>
+            <strong>🕒 Office Hours</strong>
+        </p>
 
         <p>
             Monday - Saturday
@@ -76,35 +116,86 @@ Contact
 
 
 
+    <!-- =================================================
+                        RIGHT SIDE
+    ================================================= -->
+
     <div class="contact-right">
 
         <h2>Send Message</h2>
 
-        <form>
+
+        <!-- SUCCESS MESSAGE -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="contact-message">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+
+        <!-- CONTACT FORM -->
+
+        <form
+            method="POST"
+            action="{% url 'contact' %}"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- NAME -->
 
             <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
+                autocomplete="name"
                 required
             >
+
+
+            <!-- EMAIL -->
 
             <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
+                autocomplete="email"
                 required
             >
 
+
+            <!-- SUBJECT -->
+
             <input
                 type="text"
+                name="subject"
                 placeholder="Subject"
                 required
             >
 
+
+            <!-- MESSAGE -->
+
             <textarea
+                name="message"
                 rows="6"
                 placeholder="Your Message"
                 required
             ></textarea>
+
+
+            <!-- SUBMIT -->
 
             <button type="submit">
 
@@ -120,17 +211,22 @@ Contact
 
 
 
+<!-- =====================================================
+                    GOOGLE MAP
+===================================================== -->
+
 <section class="map-section">
 
-    <h2>College Location</h2>
+    <h2>
+        College Location
+    </h2>
 
     <p>
-
         Visit Shri Gulabrao Deokar College of Polytechnic, Jalgaon.
-
     </p>
 
     <br>
+
 
     <div class="map-container">
 
@@ -142,11 +238,11 @@ Contact
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
-
         </iframe>
 
     </div>
 
 </section>
+
 
 {% endblock %}

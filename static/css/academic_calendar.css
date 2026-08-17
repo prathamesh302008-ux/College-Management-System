@@ -1,0 +1,422 @@
+/* =========================================================
+   ACADEMIC CALENDAR
+========================================================= */
+
+.academic-calendar-page,
+.calendar-form-page,
+.delete-page {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.calendar-small-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    opacity: 0.65;
+}
+
+.calendar-header h1,
+.form-header h1 {
+    margin: 6px 0;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.calendar-header p,
+.form-header p {
+    margin: 0;
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+========================================================= */
+
+.calendar-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+    background: #2563eb;
+    transition: 0.2s ease;
+}
+
+.calendar-add-btn:hover {
+    color: white;
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.calendar-add-btn span {
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   EVENT CONTAINER
+========================================================= */
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* =========================================================
+   EVENT CARD
+========================================================= */
+
+.calendar-event-card {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 22px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================================
+   DATE BOX
+========================================================= */
+
+.event-date-box {
+    width: 80px;
+    min-width: 80px;
+    padding: 12px 8px;
+    text-align: center;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.event-day {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.event-month {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.event-year {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   EVENT INFORMATION
+========================================================= */
+
+.event-information {
+    flex: 1;
+    min-width: 0;
+}
+
+.event-top-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.event-top-row h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.event-type {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.event-description {
+    margin: 9px 0;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.event-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.event-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 8px 13px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.edit-btn {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.edit-btn:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.delete-btn {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.delete-btn:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.calendar-empty {
+    text-align: center;
+    padding: 70px 20px;
+    border-radius: 16px;
+    border: 1px dashed #d1d5db;
+    background: #ffffff;
+}
+
+.empty-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.calendar-empty h2 {
+    margin: 0 0 8px;
+}
+
+.calendar-empty p {
+    margin-bottom: 25px;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-header {
+    margin-bottom: 25px;
+}
+
+.calendar-form-card {
+    max-width: 850px;
+    padding: 30px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #fff;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================================================
+   FORM BUTTONS
+========================================================= */
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.cancel-btn,
+.save-btn,
+.delete-confirm-btn {
+    padding: 11px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.save-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.delete-confirm-btn {
+    background: #dc2626;
+    color: white;
+}
+
+
+/* =========================================================
+   DELETE PAGE
+========================================================= */
+
+.delete-page {
+    display: flex;
+    justify-content: center;
+}
+
+.delete-card {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 40px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+}
+
+.delete-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.delete-card h1 {
+    margin-bottom: 10px;
+}
+
+.delete-card p {
+    color: #6b7280;
+}
+
+.delete-warning {
+    color: #dc2626 !important;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .academic-calendar-page,
+    .calendar-form-page,
+    .delete-page {
+        padding: 18px;
+    }
+
+    .calendar-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .calendar-event-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .event-date-box {
+        width: 70px;
+    }
+
+    .event-actions {
+        width: 100%;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        flex: 1;
+        text-align: center;
+    }
+
+    .calendar-form-card {
+        padding: 20px;
+    }
+
+}
