@@ -17,7 +17,7 @@ SECRET_KEY = "django-insecure-college-management-system"
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "college-management-system123.onrender.com",
+    "college-management-system-ten-theta.vercel.app",
     "localhost",
     "127.0.0.1",
 ]
