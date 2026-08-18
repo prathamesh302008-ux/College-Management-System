@@ -6,6 +6,10 @@ from .models import Book
 from .forms import BookForm
 
 
+# ==========================================================
+# ROLE FUNCTIONS
+# ==========================================================
+
 def get_role(request):
     if request.user.is_authenticated and hasattr(request.user, "userprofile"):
         return request.user.userprofile.role
@@ -29,31 +33,43 @@ def can_view_library(request):
     ]
 
 
-# Book List
+# ==========================================================
+# BOOK LIST
+# ==========================================================
+
 @login_required
 def book_list(request):
 
     if not can_view_library(request):
         return redirect("login")
 
-    search = request.GET.get("search", "")
+    # Search
+    search = request.GET.get("search", "").strip()
 
     books = Book.objects.all().order_by("id")
 
     if search:
         books = books.filter(
             book_name__icontains=search
-        ) | Book.objects.filter(
+        ) | books.filter(
             author__icontains=search
-        ) | Book.objects.filter(
+        ) | books.filter(
             book_code__icontains=search
         )
 
-    paginator = Paginator(books, 10)
+    # ======================================================
+    # PAGINATION
+    # ======================================================
+
+    paginator = Paginator(books, 5)
 
     page_number = request.GET.get("page")
 
     page_obj = paginator.get_page(page_number)
+
+    # ======================================================
+    # TEMPLATE
+    # ======================================================
 
     return render(
         request,
@@ -66,7 +82,10 @@ def book_list(request):
     )
 
 
-# Add Book
+# ==========================================================
+# ADD BOOK
+# ==========================================================
+
 @login_required
 def add_book(request):
 
@@ -82,7 +101,6 @@ def add_book(request):
             return redirect("book_list")
 
     else:
-
         form = BookForm()
 
     return render(
@@ -94,7 +112,10 @@ def add_book(request):
     )
 
 
-# Update Book
+# ==========================================================
+# UPDATE BOOK
+# ==========================================================
+
 @login_required
 def edit_book(request, id):
 
@@ -115,7 +136,6 @@ def edit_book(request, id):
             return redirect("book_list")
 
     else:
-
         form = BookForm(instance=book)
 
     return render(
@@ -127,7 +147,10 @@ def edit_book(request, id):
     )
 
 
-# Delete Book
+# ==========================================================
+# DELETE BOOK
+# ==========================================================
+
 @login_required
 def delete_book(request, id):
 

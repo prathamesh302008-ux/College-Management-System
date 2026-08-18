@@ -7,29 +7,25 @@ from .models import Student
 from .forms import StudentForm
 
 
+# =====================================================
+# ROLE
+# =====================================================
+
 def get_role(request):
+
     if hasattr(request.user, "userprofile"):
         return request.user.userprofile.role
+
     return ""
 
 
-def is_principal(request):
-    return get_role(request) == "Principal"
-
-
-def is_hod(request):
-    return get_role(request) == "HOD"
-
-
-def is_faculty(request):
-    return get_role(request) == "Faculty"
-
-
 def is_student(request):
+
     return get_role(request) == "Student"
 
 
 def can_manage_students(request):
+
     return get_role(request) in [
         "Principal",
         "HOD",
@@ -37,30 +33,49 @@ def can_manage_students(request):
     ]
 
 
+# =====================================================
+# STUDENT LIST
+# =====================================================
+
 @login_required
 def student_list(request):
 
-    # Principal / HOD / Faculty
+    # =================================================
+    # PRINCIPAL / HOD / FACULTY
+    # =================================================
+
     if can_manage_students(request):
 
-        search = request.GET.get("search", "")
+        search = request.GET.get(
+            "search",
+            ""
+        )
 
         students = Student.objects.all().order_by("id")
 
         if search:
+
             students = students.filter(
                 first_name__icontains=search
-            ) | Student.objects.filter(
+            ) | students.filter(
                 last_name__icontains=search
-            ) | Student.objects.filter(
+            ) | students.filter(
                 enrollment_no__icontains=search
             )
 
-        paginator = Paginator(students, 10)
+        # 5 students per page
+        paginator = Paginator(
+            students,
+            5
+        )
 
-        page_number = request.GET.get("page")
+        page_number = request.GET.get(
+            "page"
+        )
 
-        page_obj = paginator.get_page(page_number)
+        page_obj = paginator.get_page(
+            page_number
+        )
 
         return render(
             request,
@@ -73,7 +88,10 @@ def student_list(request):
             }
         )
 
-    # Student
+    # =================================================
+    # STUDENT
+    # =================================================
+
     elif is_student(request):
 
         try:
@@ -92,7 +110,7 @@ def student_list(request):
                     "page_obj": [],
                     "search": "",
                     "principal": False,
-                    "message": "Student record not found."
+                    "message": "Student record not found.",
                 }
             )
 
@@ -107,14 +125,27 @@ def student_list(request):
             }
         )
 
-    return HttpResponseForbidden("Access Denied")
+    # =================================================
+    # ACCESS DENIED
+    # =================================================
 
+    return HttpResponseForbidden(
+        "Access Denied"
+    )
+
+
+# =====================================================
+# ADD STUDENT
+# =====================================================
 
 @login_required
 def add_student(request):
 
     if not can_manage_students(request):
-        return HttpResponseForbidden("Access Denied")
+
+        return HttpResponseForbidden(
+            "Access Denied"
+        )
 
     if request.method == "POST":
 
@@ -124,8 +155,12 @@ def add_student(request):
         )
 
         if form.is_valid():
+
             form.save()
-            return redirect("student_list")
+
+            return redirect(
+                "student_list"
+            )
 
     else:
 
@@ -140,11 +175,18 @@ def add_student(request):
     )
 
 
+# =====================================================
+# EDIT STUDENT
+# =====================================================
+
 @login_required
 def edit_student(request, id):
 
     if not can_manage_students(request):
-        return HttpResponseForbidden("Access Denied")
+
+        return HttpResponseForbidden(
+            "Access Denied"
+        )
 
     student = get_object_or_404(
         Student,
@@ -160,8 +202,12 @@ def edit_student(request, id):
         )
 
         if form.is_valid():
+
             form.save()
-            return redirect("student_list")
+
+            return redirect(
+                "student_list"
+            )
 
     else:
 
@@ -178,11 +224,18 @@ def edit_student(request, id):
     )
 
 
+# =====================================================
+# DELETE STUDENT
+# =====================================================
+
 @login_required
 def delete_student(request, id):
 
     if not can_manage_students(request):
-        return HttpResponseForbidden("Access Denied")
+
+        return HttpResponseForbidden(
+            "Access Denied"
+        )
 
     student = get_object_or_404(
         Student,
@@ -191,4 +244,6 @@ def delete_student(request, id):
 
     student.delete()
 
-    return redirect("student_list")
+    return redirect(
+        "student_list"
+    )

@@ -34,7 +34,7 @@ def faculty_list(request):
             faculty_id__icontains=search
         )
 
-    paginator = Paginator(faculty, 10)
+    paginator = Paginator(faculty, 5)
 
     page_number = request.GET.get("page")
 

@@ -20,6 +20,7 @@ Library
 
     </div>
 
+
     {% if request.user.userprofile.role != "Student" %}
     <form method="GET" class="search-form">
 
@@ -40,6 +41,7 @@ Library
 
     </form>
     {% endif %}
+
 
     <div class="table-card">
 
@@ -65,6 +67,7 @@ Library
 
             </thead>
 
+
             <tbody>
 
             {% for book in books %}
@@ -72,45 +75,70 @@ Library
                 <tr>
 
                     <td>{{ book.book_name }}</td>
+
                     <td>{{ book.book_code }}</td>
+
                     <td>{{ book.author }}</td>
+
                     <td>{{ book.publisher }}</td>
+
                     <td>{{ book.quantity }}</td>
+
                     <td>{{ book.available }}</td>
+
                     <td>{{ book.status }}</td>
 
+
                     {% if request.user.userprofile.role != "Student" %}
+
                     <td>
 
-                        <a href="{% url 'edit_book' book.id %}" class="edit-btn">
+                        <a
+                            href="{% url 'edit_book' book.id %}"
+                            class="edit-btn"
+                        >
                             Edit
                         </a>
 
                         |
 
-                        <a href="{% url 'delete_book' book.id %}"
-                           class="delete-btn"
-                           onclick="return confirm('Delete this book?');">
+                        <a
+                            href="{% url 'delete_book' book.id %}"
+                            class="delete-btn"
+                            onclick="return confirm('Delete this book?');"
+                        >
                             Delete
                         </a>
 
                     </td>
+
                     {% endif %}
 
                 </tr>
+
 
             {% empty %}
 
                 <tr>
 
                     {% if request.user.userprofile.role != "Student" %}
-                        <td colspan="8" style="text-align:center;">
-                            No Books Available
-                        </td>
+
+                    <td
+                        colspan="8"
+                        style="text-align:center;"
+                    >
+                        No Books Available
+                    </td>
+
                     {% else %}
-                        <td colspan="7" style="text-align:center;">
-                            No Books Available
-                        </td>
+
+                    <td
+                        colspan="7"
+                        style="text-align:center;"
+                    >
+                        No Books Available
+                    </td>
+
                     {% endif %}
 
                 </tr>
@@ -123,33 +151,42 @@ Library
 
     </div>
 
-    {% if request.user.userprofile.role != "Student" %}
 
-    <br>
+    <!-- ==================================================
+                         PAGINATION
+    =================================================== -->
+
+    {% if page_obj.has_other_pages %}
 
     <div class="pagination">
 
         {% if page_obj.has_previous %}
 
-            <a href="?page=1&search={{ search }}">First</a>
+            <a href="?page=1{% if search %}&search={{ search }}{% endif %}">
+                First
+            </a>
 
-            <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+            <a href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">
                 Previous
             </a>
 
         {% endif %}
 
+
         <span>
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            Page {{ page_obj.number }}
+            of
+            {{ page_obj.paginator.num_pages }}
         </span>
+
 
         {% if page_obj.has_next %}
 
-            <a href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+            <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}">
                 Next
             </a>
 
-            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search }}">
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}">
                 Last
             </a>
 
@@ -158,6 +195,7 @@ Library
     </div>
 
     {% endif %}
+
 
 </div>
 

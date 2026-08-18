@@ -7,88 +7,115 @@ from .forms import AttendanceForm
 from students.models import Student
 
 
-def is_principal(request):
-    return (
+# =========================================================
+# ROLE CHECK FUNCTIONS
+# =========================================================
+
+def get_role(request):
+    if (
         request.user.is_authenticated
         and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role == "Principal"
-    )
+    ):
+        return request.user.userprofile.role
+
+    return ""
+
+
+def is_principal(request):
+    return get_role(request) == "Principal"
 
 
 def is_hod(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role == "HOD"
-    )
+    return get_role(request) == "HOD"
 
 
 def is_faculty(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role == "Faculty"
-    )
+    return get_role(request) == "Faculty"
 
 
 def is_student(request):
-    return (
-        request.user.is_authenticated
-        and hasattr(request.user, "userprofile")
-        and request.user.userprofile.role == "Student"
-    )
+    return get_role(request) == "Student"
 
+
+# =========================================================
+# ATTENDANCE LIST
+# =========================================================
 
 @login_required
 def attendance_list(request):
 
-    search = request.GET.get("search", "")
+    search = request.GET.get("search", "").strip()
 
-    # ==========================
-    # Principal / HOD / Faculty
-    # ==========================
+    # =====================================================
+    # PRINCIPAL / HOD / FACULTY
+    # =====================================================
 
-    if is_principal(request) or is_hod(request) or is_faculty(request):
+    if (
+        is_principal(request)
+        or is_hod(request)
+        or is_faculty(request)
+    ):
 
-        attendance = Attendance.objects.all().order_by("-attendance_date")
+        attendance = Attendance.objects.all().order_by(
+            "-attendance_date",
+            "-id"
+        )
 
         if search:
 
             attendance = attendance.filter(
                 student__first_name__icontains=search
-            ) | Attendance.objects.filter(
+            ) | attendance.filter(
                 student__last_name__icontains=search
+            ) | attendance.filter(
+                student__enrollment_no__icontains=search
             )
 
-    # ==========================
-    # Student
-    # ==========================
+            attendance = attendance.order_by(
+                "-attendance_date",
+                "-id"
+            )
+
+    # =====================================================
+    # STUDENT
+    # =====================================================
 
     elif is_student(request):
 
-        try:
+        # Student login par saari attendance dikhayenge
+        attendance = Attendance.objects.all().order_by(
+            "-attendance_date",
+            "-id"
+        )
 
-            student = Student.objects.get(
-                user=request.user
-            )
-
-            attendance = Attendance.objects.filter(
-                student=student
-            ).order_by("-attendance_date")
-
-        except Student.DoesNotExist:
-
-            attendance = Attendance.objects.none()
+    # =====================================================
+    # UNKNOWN USER
+    # =====================================================
 
     else:
 
         return redirect("login")
 
-    paginator = Paginator(attendance, 10)
+
+    # =====================================================
+    # PAGINATION
+    # =====================================================
+
+    paginator = Paginator(
+        attendance,
+        5
+    )
 
     page_number = request.GET.get("page")
 
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(
+        page_number
+    )
+
+
+    # =====================================================
+    # TEMPLATE
+    # =====================================================
 
     return render(
         request,
@@ -101,25 +128,40 @@ def attendance_list(request):
     )
 
 
+# =========================================================
+# ADD ATTENDANCE
+# =========================================================
+
 @login_required
 def add_attendance(request):
 
-    if not (is_principal(request) or is_hod(request) or is_faculty(request)):
+    if not (
+        is_principal(request)
+        or is_hod(request)
+        or is_faculty(request)
+    ):
+
         return redirect("attendance_list")
+
 
     if request.method == "POST":
 
-        form = AttendanceForm(request.POST)
+        form = AttendanceForm(
+            request.POST
+        )
 
         if form.is_valid():
 
             form.save()
 
-            return redirect("attendance_list")
+            return redirect(
+                "attendance_list"
+            )
 
     else:
 
         form = AttendanceForm()
+
 
     return render(
         request,
@@ -130,16 +172,27 @@ def add_attendance(request):
     )
 
 
+# =========================================================
+# EDIT ATTENDANCE
+# =========================================================
+
 @login_required
 def edit_attendance(request, id):
 
-    if not (is_principal(request) or is_hod(request) or is_faculty(request)):
+    if not (
+        is_principal(request)
+        or is_hod(request)
+        or is_faculty(request)
+    ):
+
         return redirect("attendance_list")
+
 
     attendance = get_object_or_404(
         Attendance,
         id=id
     )
+
 
     if request.method == "POST":
 
@@ -152,13 +205,16 @@ def edit_attendance(request, id):
 
             form.save()
 
-            return redirect("attendance_list")
+            return redirect(
+                "attendance_list"
+            )
 
     else:
 
         form = AttendanceForm(
             instance=attendance
         )
+
 
     return render(
         request,
@@ -169,11 +225,21 @@ def edit_attendance(request, id):
     )
 
 
+# =========================================================
+# DELETE ATTENDANCE
+# =========================================================
+
 @login_required
 def delete_attendance(request, id):
 
-    if not (is_principal(request) or is_hod(request) or is_faculty(request)):
+    if not (
+        is_principal(request)
+        or is_hod(request)
+        or is_faculty(request)
+    ):
+
         return redirect("attendance_list")
+
 
     attendance = get_object_or_404(
         Attendance,
@@ -182,4 +248,6 @@ def delete_attendance(request, id):
 
     attendance.delete()
 
-    return redirect("attendance_list")
+    return redirect(
+        "attendance_list"
+    )

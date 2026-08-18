@@ -34,7 +34,7 @@ def department_list(request):
             hod_name__icontains=search
         )
 
-    paginator = Paginator(departments, 10)
+    paginator = Paginator(departments, 5)
 
     page_number = request.GET.get("page")
 

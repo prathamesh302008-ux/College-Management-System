@@ -32,7 +32,7 @@ def course_list(request):
             course_code__icontains=search
         )
 
-    paginator = Paginator(courses, 10)
+    paginator = Paginator(courses, 5)
 
     page_number = request.GET.get("page")
 

@@ -64,7 +64,7 @@ def fee_list(request):
     else:
         return redirect("login")
 
-    paginator = Paginator(fees, 10)
+    paginator = Paginator(fees, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

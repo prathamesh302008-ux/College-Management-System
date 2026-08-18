@@ -45,7 +45,7 @@ def notice_list(request):
             title__icontains=search
         )
 
-    paginator = Paginator(notices, 10)
+    paginator = Paginator(notices, 5)
 
     page_number = request.GET.get("page")
 

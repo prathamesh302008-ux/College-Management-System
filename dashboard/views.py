@@ -24,6 +24,10 @@ def analytics(request):
         "role": role,
         "username": request.user.username,
 
+        # =================================================
+        # COLLEGE TOTALS
+        # =================================================
+
         "total_students": Student.objects.count(),
         "total_faculty": Faculty.objects.count(),
         "total_courses": Course.objects.count(),
@@ -33,6 +37,60 @@ def analytics(request):
         "total_books": Book.objects.count(),
         "total_notices": Notice.objects.count(),
     }
+
+    # =====================================================
+    # STUDENT ANALYTICS
+    # =====================================================
+
+    if role == "Student":
+
+        try:
+            student = Student.objects.get(
+                user=request.user
+            )
+
+            attendance = Attendance.objects.filter(
+                student=student
+            )
+
+            context.update({
+
+                "student": student,
+
+                "student_attendance":
+                    attendance.count(),
+
+                "student_present":
+                    attendance.filter(
+                        status="Present"
+                    ).count(),
+
+                "student_absent":
+                    attendance.filter(
+                        status="Absent"
+                    ).count(),
+
+                "student_leave":
+                    attendance.filter(
+                        status="Leave"
+                    ).count(),
+
+                "student_fee":
+                    Fee.objects.filter(
+                        student=student
+                    ).first(),
+            })
+
+        except Student.DoesNotExist:
+
+            context.update({
+                "student": None,
+                "student_attendance": 0,
+                "student_present": 0,
+                "student_absent": 0,
+                "student_leave": 0,
+                "student_fee": None,
+            })
 
     return render(
         request,
@@ -64,6 +122,10 @@ def home(request):
 
         context.update({
 
+            # -------------------------------
+            # MAIN COUNTS
+            # -------------------------------
+
             "total_students":
                 Student.objects.count(),
 
@@ -88,6 +150,10 @@ def home(request):
             "total_notices":
                 Notice.objects.count(),
 
+            # -------------------------------
+            # LATEST DATA
+            # -------------------------------
+
             "latest_students":
                 Student.objects.order_by("-id")[:5],
 
@@ -96,7 +162,6 @@ def home(request):
 
             "latest_notices":
                 Notice.objects.order_by("-id")[:5],
-
         })
 
 
@@ -122,7 +187,15 @@ def home(request):
 
             context.update({
 
+                # -------------------------------
+                # STUDENT INFORMATION
+                # -------------------------------
+
                 "student": student,
+
+                # -------------------------------
+                # OWN ATTENDANCE ONLY
+                # -------------------------------
 
                 "attendance_count":
                     attendance.count(),
@@ -142,19 +215,49 @@ def home(request):
                         status="Leave"
                     ).count(),
 
+                # -------------------------------
+                # OWN FEE
+                # -------------------------------
+
                 "fee": fee,
+
+                # -------------------------------
+                # LIBRARY
+                # -------------------------------
+
+                "books":
+                    Book.objects.count(),
+
+                # -------------------------------
+                # NOTICES
+                # -------------------------------
+
+                "latest_notices":
+                    Notice.objects.order_by("-id")[:5],
+            })
+
+        except Student.DoesNotExist:
+
+            context.update({
+
+                "student": None,
+
+                "attendance_count": 0,
+
+                "present_count": 0,
+
+                "absent_count": 0,
+
+                "leave_count": 0,
+
+                "fee": None,
 
                 "books":
                     Book.objects.count(),
 
                 "latest_notices":
                     Notice.objects.order_by("-id")[:5],
-
             })
-
-        except Student.DoesNotExist:
-
-            context["student"] = None
 
 
     # =================================================
@@ -171,9 +274,11 @@ def home(request):
             "total_books":
                 Book.objects.count(),
 
+            "total_notices":
+                Notice.objects.count(),
+
             "latest_notices":
                 Notice.objects.order_by("-id")[:5],
-
         })
 
 
@@ -191,11 +296,17 @@ def home(request):
             "total_books":
                 Book.objects.count(),
 
+            "total_notices":
+                Notice.objects.count(),
+
             "latest_notices":
                 Notice.objects.order_by("-id")[:5],
-
         })
 
+
+    # =================================================
+    # RENDER DASHBOARD
+    # =================================================
 
     return render(
         request,

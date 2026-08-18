@@ -13,14 +13,18 @@ Attendance
         <h1>Attendance List</h1>
 
         {% if request.user.userprofile.role != "Student" %}
+
         <a href="{% url 'add_attendance' %}" class="add-student-btn">
             + Mark Attendance
         </a>
+
         {% endif %}
 
     </div>
 
+
     {% if request.user.userprofile.role != "Student" %}
+
     <form method="GET" class="search-form">
 
         <input
@@ -36,7 +40,9 @@ Attendance
         </button>
 
     </form>
+
     {% endif %}
+
 
     <div class="table-card">
 
@@ -47,8 +53,11 @@ Attendance
                 <tr>
 
                     <th>Student</th>
+
                     <th>Date</th>
+
                     <th>Status</th>
+
                     <th>Remarks</th>
 
                     {% if request.user.userprofile.role != "Student" %}
@@ -59,52 +68,81 @@ Attendance
 
             </thead>
 
+
             <tbody>
 
             {% for item in attendance %}
 
                 <tr>
 
-                    <td>{{ item.student }}</td>
+                    <td>
+                        {{ item.student.first_name }}
+                        {{ item.student.last_name }}
+                    </td>
 
-                    <td>{{ item.attendance_date }}</td>
+                    <td>
+                        {{ item.attendance_date }}
+                    </td>
 
-                    <td>{{ item.status }}</td>
+                    <td>
+                        {{ item.status }}
+                    </td>
 
-                    <td>{{ item.remarks }}</td>
+                    <td>
+                        {{ item.remarks|default:"-" }}
+                    </td>
+
 
                     {% if request.user.userprofile.role != "Student" %}
+
                     <td>
 
-                        <a href="{% url 'edit_attendance' item.id %}" class="edit-btn">
+                        <a
+                            href="{% url 'edit_attendance' item.id %}"
+                            class="edit-btn"
+                        >
                             Edit
                         </a>
 
                         |
 
-                        <a href="{% url 'delete_attendance' item.id %}"
-                           class="delete-btn"
-                           onclick="return confirm('Are you sure you want to delete this attendance?');">
+                        <a
+                            href="{% url 'delete_attendance' item.id %}"
+                            class="delete-btn"
+                            onclick="return confirm('Are you sure you want to delete this attendance?');"
+                        >
                             Delete
                         </a>
 
                     </td>
+
                     {% endif %}
 
                 </tr>
+
 
             {% empty %}
 
                 <tr>
 
                     {% if request.user.userprofile.role != "Student" %}
-                    <td colspan="5" style="text-align:center;">
+
+                    <td
+                        colspan="5"
+                        style="text-align:center;"
+                    >
                         No Attendance Found
                     </td>
+
                     {% else %}
-                    <td colspan="4" style="text-align:center;">
+
+                    <td
+                        colspan="4"
+                        style="text-align:center;"
+                    >
                         No Attendance Found
                     </td>
+
                     {% endif %}
 
                 </tr>
@@ -117,7 +155,12 @@ Attendance
 
     </div>
 
-    {% if request.user.userprofile.role != "Student" %}
+
+    <!-- =================================================
+                         PAGINATION
+    ================================================= -->
+
+    {% if page_obj.has_other_pages %}
 
     <br>
 
@@ -125,7 +168,9 @@ Attendance
 
         {% if page_obj.has_previous %}
 
-            <a href="?page=1&search={{ search }}">First</a>
+            <a href="?page=1&search={{ search }}">
+                First
+            </a>
 
             <a href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
                 Previous
@@ -133,9 +178,13 @@ Attendance
 
         {% endif %}
 
+
         <span>
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            Page {{ page_obj.number }}
+            of
+            {{ page_obj.paginator.num_pages }}
         </span>
+
 
         {% if page_obj.has_next %}
 
